@@ -59,6 +59,7 @@ author:
 -
      ins: S.K. Sahib
      name: Shivan Kaul Sahib
+     organization: Cisco Systems
      email: shivankaulsahib@gmail.com
 
 normative:
@@ -139,13 +140,11 @@ This report describes implementation experience between various components worki
 
 
 
-Introduction
-============
+# Introduction
 
 This document evaluates the usage of HTTP Status Code 451, which was standardized by the IETF in February 2016 {{RFC7725}}. This implementation report aims to illuminate whether the status code does what it set out to do ("provide transparency in circumstances where issues of law or public policy affect server operations"), the different ways it is being used, positive and negative impacts the standard might have and we end with suggestions for improvement of the standard. 
 
-Vocabulary
-==========
+# Vocabulary
 
 Blocking 
 : The act of making an HTTP resource inaccessible to a class of users.
@@ -174,38 +173,36 @@ HTTP status
  Complainant 
 : A party making a Legal demand; may or may not be an Authority (e.g., the US DMCA allows a copyright holder to demand takedown).
 
-Target audiences
-================
+# Target audiences
 
-# Who is likely to implement the 451 status code?
+## Who is likely to implement the 451 status code?
 
-## Server operators 
+### Server operators 
 Server operators that are being confronted with an order from a legal authority can use the HTTP Status Code to communicate to third parties why the resource is not available on the server.
 
-## Intermediaries 
+### Intermediaries 
   Intermediaries such as Internet Service Providers, Content Distribution Networks and other might be obligated by a legal authority in their operational jurisdiction to filter certain content. The HTTP status code would add transparency to this practice.
 
-# Who is likely to use the 451 status code data?
+## Who is likely to use the 451 status code data?
 
-## Browser vendors 
+### Browser vendors 
 Browser vendors might implement functionality to communicate the presence of a HTTP status code 451 to a user.
 
-## End users
+### End users
 End users will be informed about why the information they are trying to access is not available, instead of merely concluding that the content is not available due to other reasons (e.g., 404 unavailable). 
 
-## Researchers 
+### Researchers 
 Researchers might want to scan for the prevalence of blocking, as well as trends in blocking behavior. 
 
-## Civil society
+### Civil society
 Civil society may want to use instances of HTTP status code 451 to highlight censorship and censorship trends, to challenge blocking.
 
-## Governments
+### Governments
 Governments might want to verify compliance with blocking orders and use HTTP status code 451 to do so on the networks in their jurisdiction.
 
-Current Usage
-=============
+# Current Usage
 
-# Overview
+## Overview
 
 In the majority of cases in which HTTP status code 451 is being deployed {{Censys}}, the status code reads as follows - "451 Unavailable For Legal Reasons" or "451" or "451 Unknown Error" or "451 Error" or "451 Unavailable For Legal Reasons (burned)" or "451 OK". The Page Title could say "404 Not Found" or "Blocked" or "451 -" or "Restricted access" or "Bloqueado por ordem judicial" ("Blocked by judicial order") or "Sito censurato" ("Censored site") or "Доступ ограничен" ("Access is restricted") or "Зелёная точка - доступ к запрашиваемому ресурсу ограничен" ("Zelenaya tochka" - Internet and TV provider - access to the requested resource is restricted")or "Violazione del bispensiero" or "Please report sexual abuse against children to the Swedish National  Bureau of Investigation!" or "Copyright Notice" or "451 RKN Redirect" (RKN is likely Russia's Roskomnadzor) or "ATTENZIONE!! - POLIZIA POSTALE E DELLE COMUNICAZIONI - PAGINA BLOCCATA" ("Attention! - Postal and Communications Policy - Blocked Page") or "451 Unavailable For Legal Reasons 本网站由于国家政策而不可用" (Chinese: "This site is not available due to national policy").
 
@@ -213,7 +210,7 @@ The hosts that were observed implementing the status code are located in Russia,
 
 Several large content providers are now supporting the HTTP 451 Status Code, such as {{Github}} and {{Reddit}}, whereas other content providers such as {{Twitter}}, {{Facebook}}, and {{Youtube}} are currently not using the HTTP status code to indicate the blocking or takedown of specific content.
 
-# Trends and observations
+## Trends and observations
 
 - The majority of instance of HTTP status code 451 provide no explanation in the response body.
 
@@ -227,8 +224,7 @@ Several large content providers are now supporting the HTTP 451 Status Code, suc
 
 - HTTP Status Code 451 is thusfar only served by hosts, not by intermediaries.
 
-Potential negative or positive impacts
-======================================
+# Potential negative or positive impacts
 
 - {{RFC7725}} specifies a status code for web resources that are blocked for legal reasons. The HTTP status code 451 is designed to enable content providers and intermediaries (including ISPs and search engines) to notify users that their access to specific web resources has been blocked for legal reasons. The standard also recommends that the notification include an explanation. This is important because this is the detail the user needs to be able to understand why access has been blocked, and if desired, to take action to challenge the blocked access. It also helps content servers and intermediaries who have been required to block access to notify users who directed that access by blocked.
 
@@ -246,8 +242,7 @@ Potential negative or positive impacts
 
 - The usage of HTTP status code 451 might lead to an increase in blocking because it makes analyzing compliance easier. 
 
-What are features of a blocking reporting infrastructure that would be useful?
-==============================================================================
+# What are features of a blocking reporting infrastructure that would be useful?
 
 - The reporting format needs to cover information enough to satisfy transparency and offer insight about possible misuse of 451 error as a vehicle for censorship.
 
@@ -270,8 +265,7 @@ What are features of a blocking reporting infrastructure that would be useful?
 -- Contact information for relevant authority for the purposes of verification of procedural stage and appeal or redress opportunities.
 
 
-What features of blocking events are supported by the existing 451 status code, and what features do we need to add?
-====================================================================================================================
+# What features of blocking events are supported by the existing 451 status code, and what features do we need to add?
 
 - Guidance on the representation of HTTP status code for subresources in browsers
 
@@ -281,16 +275,13 @@ What features of blocking events are supported by the existing 451 status code, 
 
 - Guidance on a HTTP link header to indicate that a resources that is linked on the page, but not loaded, is no longer available for legal reasons.
 
-Appendix: Legal Realities
-=========================
+# Appendix: Legal Realities
 
 In the light of the use cases outlined above underneath we are providing an overview of legal frameworks in a number of countries that could be used to make a blocking request. This is to show that a reference to a the description of blocked content, the legal source on which the blocking order or request is based and the authority that is makes the order or request is crucial in understanding the context and nature of the blockage.
 
-# Russia
+## Russia
 
-Blocking by the government:
-
-## Federal Law of 27 July 2006
+### Blocking by government: Federal Law of 27 July 2006
 Law No. 149-FZ on Information, Information Technologies and Protection of Information and its amendments:
 
 - “Blacklist” law 139-FZ (2012) – allowing to block websites if they appear to have dangerous information for children such as information about suicide and drugs. The blocking was often done by keyword so as a result one of the biggest wiki sites in Russia (Lukmore) was accused of drugs propaganda, an online encyclopedia (Absurdopedia) was accused of suicide propaganda and an online game was blocked because on it’s forum somebody used a word “drug”. 
@@ -305,44 +296,44 @@ Law No. 149-FZ on Information, Information Technologies and Protection of Inform
 
 - The laws against extremism that have been updated throughout the past 5 years expanding the term “extremism” and making the punishment tougher (jail terms for posting and reposting) as well as blocking. These laws have been used widely after the conflict in Ukraine. Some people got jail sentences and resources were being blocked for spreading information sympathizing with the Ukrainian side. Such laws are particularly vague and “extremism” is very laxly defined. For example, “…extremist materials, as well as information propagating racial, national or religious hatred or enmity or hatred towards any social group.” 
 
-## “Yarovaya laws” 
+### “Yarovaya laws” 
 This law was approved by the Parliament and, if passed, will oblige messaging apps to store messaging history and decrypt messages at prosecutors’ request. 
 
-# Chile
+## Chile
 
-## Blocking by courts
+### Blocking by courts
 The Law No. 20.435 (Copyright Act reform from 2010) contains a notice and take down procedure, for copyright infringements under which a court order is required -instead of a private notice like happens in the DMCA– to have content taken down.
 A Supreme Court decision from 2016 held that it was possible to request a news oulet to remove content in its website to enforce the constitutional right of privacy, when the data is no longer relevant and it availability on the network cause harm to the data subject. The case was controversial because the information was about a public servant condemned in a pedophilia case. This decision has been used to enforce a kind of ‘right to be forgotten’ for lower courts since the Supreme Court decision, but there is a lack of general legislation that clarify this cause of removals. 
 On the other hand, the Law No. 20.453 tackles intermediary non-interference from the perspective of users by adding to the general rules within the General Telecommunications Act (Law Nº 18.168) new rules for internet service providers. Among those rules the internet service providers “shall not block or interfere in any way with the rights of the user to use any content, application or service on the internet; but they may take traffic management measures or block contents upon user requests (and to their cost)”.
 
-# Iran
+## Iran
 
-## Blocking by government
+### Blocking by government
 The Committee Charged with Determining Offensive Content (CCDOC) is the official authority on censorship and blocking of web content in Iran. The Supreme Council of Cyberspace (SCC), established in 2012, develops policies related to cyberspace governance. However, blocking and filtering directives originate from various levels of the government, including through direct orders by the judiciary independent of the SCC and CCDOC. Other organizations involved in the censorship process include the Iranian Cyber Police (FATA) and the Telecommunication Company of Iran. By national law, the Telecommunication Company of Iran (TCI) is the exclusive provider of Internet bandwidth in the country. All ISPs have to purchase bandwidth from TCI and are legally bound to use censoring software. Such a system enables a centralized filtering program for all Internet traffic in the country.
 
-## Blocking by courts
+### Blocking by courts
 In Iran, freedom of expression is regulated by the Penal Code and the Press Law of 1986. The Press Law was amended in 2000 to mandate that publishing online without a license was grounds for blocking, effectively censoring services such as Google, Facebook and Twitter. Iran also has Internet-specific laws, such as the 2001 resolution called "Regulations and Conditions Related to Computerized Information Networks" that ordered that ISPs remove 'offensive' websites and mandated the use of filtering technology. The main law in terms of applicability to Internet censorship is the Computer Crimes Law (CCL) of 2009. CCL prescribes articles that provide for content-based restrictions on the Internet usage of Iranian citizens. Articles 21 through 23, in particular, hold ISPs liable for filtering content and reporting illegal material (as described in the articles) to a 'web crimes committee' made up of government officials. ISPs are also required to store usage data and logs about visited web pages for a window of at least six months.
 It is worth noting that none of the terms used in the CCL are defined strictly, potentially over-broadening its scope. There have been many cases of Iranian bloggers being prosecuted for violation of censorship laws.
 National Internet Project: The Iranian government has been working towards the creation of a National Internet Network which would domestically host all accessible Internet content, isolating Iranian citizens from the World Wide Web. Implementation of the national network would make it easier for the government to block services and web pages through measures such as intelligent filtering. Already the use of social networking platforms such as Facebook, Instagram and Viber is heavily monitored and controlled.
 
-# India
+## India
 
-## Blocking by the government 
+### Blocking by the government 
 Under Section 69A of Information Technology Act 2000, the executive branch of the government has "the power to issue directions for blocking for public access of any information through any computer Resource". According to the law, any person can send a block request to a Nodal Officer. These Nodal Officers should be designated in all government entities to deal with block requests. The request is then approved by the state or central Chief Secretary. This step is not required if the Nodal Officer has initiated the blocking procedure without any complainant. The request is then forward to the head of CERT-IN. If it is not a public emergency, the persons or intermediaries should be given 48 hours to respond. But this is not required if the emergency provision has been invoked, but the block list still has to be reviewed by "Committee for Examination of Request" within 48 hours after the block been issued. The block lists are usually issued directly to ISPs and are marked confidential and are implemented unevenly with some ISPs providing sparse details if users try to access the blocked resources and other ISPs returning a 404 Error Code. 
 
-## Blocking by courts
+### Blocking by courts
 Increasingly Indian courts are issuing ex-parte John Doe orders for website blocking. These orders can be issued by courts for any illegal content. There are around 30 different laws that place reasonable restrictions on the right to free speech in India. For example: The Scheduled Castes and the Scheduled Tribes (Prevention of Atrocities) Act, 1989, The Prenatal Diagnostic Techniques (Regulation and Prevention of Misuse) Act, 1994 and The Juvenile Justice Act, 2000. Some of these laws have multiple provisions that regulate speech for ex. the Information Technology Act has 6 sections and the Indian Penal Code has 10 sections. Once a court order has been obtained, the order can be sent to Secretary of the Department of Electronics and Information Technology who will then forward it to ISPs. Or alternatively complainants could also send court orders directly to ISPs without following the procedure described above.
 
-## Takedowns by web sites
+### Takedowns by web sites
 Under Section 79 of the Information Technology Act 2000, both the government and private parties can send take-down notices to web sites. Intermediaries can ignore private party take-downs without losing immunity but take-down notices from the government have to be complied with. Under Section 52(1)(c) of the Indian Copyright Act, take-down notices can be sent to websites who are engaged in infringement but they need to be followed by court orders otherwise the content can be reinstated. 
 
-# United States of America
+## United States of America
 
-## Section 512 of the DMCA
+### Section 512 of the DMCA
 
 The United States Digital Millenium Copyright Act (DMCA) has a provision that has greatly shaped the landscape of online content {{Quilter}}. Section 512 of the DMCA has a "notice and takedown" procedure that copyright holders can use to assert that a piece of copyrighted material has been posted against their wishes and that it should be taken down. Under this provision, after a website operator receives a 512 notice, it must: 1) remove the material "expeditiously"; 2) notify the poster that someone has alleged copyright infringement in that material and that the material has been removed; and 3) send any "counternotices" from the poster -- objections from the poster to claims of copyright -- to the original complaintant. The complaintant must notify the website operator that it has filed a lawsuite within 10-14 days or the website can reinstate the removed material.
 
-## Other US-based forms of takedown
+### Other US-based forms of takedown
 
 There are a number of other legal methods that are used with much less frequency in the United States:
 

@@ -15,6 +15,7 @@ Expires: January 16, 2018                             Derechos Digitales
                                                              C. Runnegar
                                                                     ISOC
                                                                 S. Sahib
+                                                           Cisco Systems
                                                            July 15, 2017
 
 
@@ -52,7 +53,6 @@ Copyright Notice
 
 
 
-
 Abraham, et al.         Expires January 16, 2018                [Page 1]
 
 Internet-Draft                451ImpReport                     July 2017
@@ -73,39 +73,39 @@ Table of Contents
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
    2.  Vocabulary  . . . . . . . . . . . . . . . . . . . . . . . . .   3
    3.  Target audiences  . . . . . . . . . . . . . . . . . . . . . .   4
-   4.  Who is likely to implement the 451 status code? . . . . . . .   4
-     4.1.  Server operators  . . . . . . . . . . . . . . . . . . . .   4
-     4.2.  Intermediaries  . . . . . . . . . . . . . . . . . . . . .   4
-   5.  Who is likely to use the 451 status code data?  . . . . . . .   4
-     5.1.  Browser vendors . . . . . . . . . . . . . . . . . . . . .   4
-     5.2.  End users . . . . . . . . . . . . . . . . . . . . . . . .   4
-     5.3.  Researchers . . . . . . . . . . . . . . . . . . . . . . .   4
-     5.4.  Civil society . . . . . . . . . . . . . . . . . . . . . .   4
-     5.5.  Governments . . . . . . . . . . . . . . . . . . . . . . .   4
-   6.  Current Usage . . . . . . . . . . . . . . . . . . . . . . . .   5
-   7.  Overview  . . . . . . . . . . . . . . . . . . . . . . . . . .   5
-   8.  Trends and observations . . . . . . . . . . . . . . . . . . .   6
-   9.  Potential negative or positive impacts  . . . . . . . . . . .   6
-   10. What are features of a blocking reporting infrastructure that
+     3.1.  Who is likely to implement the 451 status code? . . . . .   4
+       3.1.1.  Server operators  . . . . . . . . . . . . . . . . . .   4
+       3.1.2.  Intermediaries  . . . . . . . . . . . . . . . . . . .   4
+     3.2.  Who is likely to use the 451 status code data?  . . . . .   4
+       3.2.1.  Browser vendors . . . . . . . . . . . . . . . . . . .   4
+       3.2.2.  End users . . . . . . . . . . . . . . . . . . . . . .   4
+       3.2.3.  Researchers . . . . . . . . . . . . . . . . . . . . .   4
+       3.2.4.  Civil society . . . . . . . . . . . . . . . . . . . .   4
+       3.2.5.  Governments . . . . . . . . . . . . . . . . . . . . .   4
+   4.  Current Usage . . . . . . . . . . . . . . . . . . . . . . . .   5
+     4.1.  Overview  . . . . . . . . . . . . . . . . . . . . . . . .   5
+     4.2.  Trends and observations . . . . . . . . . . . . . . . . .   6
+   5.  Potential negative or positive impacts  . . . . . . . . . . .   6
+   6.  What are features of a blocking reporting infrastructure that
        would be useful?  . . . . . . . . . . . . . . . . . . . . . .   7
-   11. What features of blocking events are supported by the
+   7.  What features of blocking events are supported by the
        existing 451 status code, and what features do we need to
        add?  . . . . . . . . . . . . . . . . . . . . . . . . . . . .   8
-   12. Appendix: Legal Realities . . . . . . . . . . . . . . . . . .   9
-   13. Russia  . . . . . . . . . . . . . . . . . . . . . . . . . . .   9
-     13.1.  Federal Law of 27 July 2006  . . . . . . . . . . . . . .   9
-     13.2.  "Yarovaya laws"  . . . . . . . . . . . . . . . . . . . .  10
-   14. Chile . . . . . . . . . . . . . . . . . . . . . . . . . . . .  10
-     14.1.  Blocking by courts . . . . . . . . . . . . . . . . . . .  10
-   15. Iran  . . . . . . . . . . . . . . . . . . . . . . . . . . . .  11
-     15.1.  Blocking by government . . . . . . . . . . . . . . . . .  11
-     15.2.  Blocking by courts . . . . . . . . . . . . . . . . . . .  11
-   16. India . . . . . . . . . . . . . . . . . . . . . . . . . . . .  12
-     16.1.  Blocking by the government . . . . . . . . . . . . . . .  12
-     16.2.  Blocking by courts . . . . . . . . . . . . . . . . . . .  12
-     16.3.  Takedowns by web sites . . . . . . . . . . . . . . . . .  13
-   17. United States of America  . . . . . . . . . . . . . . . . . .  13
-     17.1.  Section 512 of the DMCA  . . . . . . . . . . . . . . . .  13
+   8.  Appendix: Legal Realities . . . . . . . . . . . . . . . . . .   9
+     8.1.  Russia  . . . . . . . . . . . . . . . . . . . . . . . . .   9
+       8.1.1.  Blocking by government: Federal Law of 27 July 2006 .   9
+       8.1.2.  "Yarovaya laws" . . . . . . . . . . . . . . . . . . .  10
+     8.2.  Chile . . . . . . . . . . . . . . . . . . . . . . . . . .  10
+       8.2.1.  Blocking by courts  . . . . . . . . . . . . . . . . .  10
+     8.3.  Iran  . . . . . . . . . . . . . . . . . . . . . . . . . .  11
+       8.3.1.  Blocking by government  . . . . . . . . . . . . . . .  11
+       8.3.2.  Blocking by courts  . . . . . . . . . . . . . . . . .  11
+     8.4.  India . . . . . . . . . . . . . . . . . . . . . . . . . .  12
+       8.4.1.  Blocking by the government  . . . . . . . . . . . . .  12
+       8.4.2.  Blocking by courts  . . . . . . . . . . . . . . . . .  12
+       8.4.3.  Takedowns by web sites  . . . . . . . . . . . . . . .  13
+     8.5.  United States of America  . . . . . . . . . . . . . . . .  13
+       8.5.1.  Section 512 of the DMCA . . . . . . . . . . . . . . .  13
 
 
 
@@ -114,8 +114,8 @@ Abraham, et al.         Expires January 16, 2018                [Page 2]
 Internet-Draft                451ImpReport                     July 2017
 
 
-     17.2.  Other US-based forms of takedown . . . . . . . . . . . .  13
-   18. Informative References  . . . . . . . . . . . . . . . . . . .  14
+       8.5.2.  Other US-based forms of takedown  . . . . . . . . . .  13
+   9.  Informative References  . . . . . . . . . . . . . . . . . . .  14
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  15
 
 1.  Introduction
@@ -172,15 +172,15 @@ Internet-Draft                451ImpReport                     July 2017
 
 3.  Target audiences
 
-4.  Who is likely to implement the 451 status code?
+3.1.  Who is likely to implement the 451 status code?
 
-4.1.  Server operators
+3.1.1.  Server operators
 
    Server operators that are being confronted with an order from a legal
    authority can use the HTTP Status Code to communicate to third
    parties why the resource is not available on the server.
 
-4.2.  Intermediaries
+3.1.2.  Intermediaries
 
    Intermediaries such as Internet Service Providers, Content
    Distribution Networks and other might be obligated by a legal
@@ -188,31 +188,31 @@ Internet-Draft                451ImpReport                     July 2017
    content.  The HTTP status code would add transparency to this
    practice.
 
-5.  Who is likely to use the 451 status code data?
+3.2.  Who is likely to use the 451 status code data?
 
-5.1.  Browser vendors
+3.2.1.  Browser vendors
 
    Browser vendors might implement functionality to communicate the
    presence of a HTTP status code 451 to a user.
 
-5.2.  End users
+3.2.2.  End users
 
    End users will be informed about why the information they are trying
    to access is not available, instead of merely concluding that the
    content is not available due to other reasons (e.g., 404
    unavailable).
 
-5.3.  Researchers
+3.2.3.  Researchers
 
    Researchers might want to scan for the prevalence of blocking, as
    well as trends in blocking behavior.
 
-5.4.  Civil society
+3.2.4.  Civil society
 
    Civil society may want to use instances of HTTP status code 451 to
    highlight censorship and censorship trends, to challenge blocking.
 
-5.5.  Governments
+3.2.5.  Governments
 
    Governments might want to verify compliance with blocking orders and
    use HTTP status code 451 to do so on the networks in their
@@ -226,9 +226,9 @@ Abraham, et al.         Expires January 16, 2018                [Page 4]
 Internet-Draft                451ImpReport                     July 2017
 
 
-6.  Current Usage
+4.  Current Usage
 
-7.  Overview
+4.1.  Overview
 
    In the majority of cases in which HTTP status code 451 is being
    deployed [Censys], the status code reads as follows - "451
@@ -288,7 +288,7 @@ Internet-Draft                451ImpReport                     July 2017
    not using the HTTP status code to indicate the blocking or takedown
    of specific content.
 
-8.  Trends and observations
+4.2.  Trends and observations
 
    -  The majority of instance of HTTP status code 451 provide no
       explanation in the response body.
@@ -311,7 +311,7 @@ Internet-Draft                451ImpReport                     July 2017
    -  HTTP Status Code 451 is thusfar only served by hosts, not by
       intermediaries.
 
-9.  Potential negative or positive impacts
+5.  Potential negative or positive impacts
 
    -  [RFC7725] specifies a status code for web resources that are
       blocked for legal reasons.  The HTTP status code 451 is designed
@@ -377,8 +377,8 @@ Internet-Draft                451ImpReport                     July 2017
    -  The usage of HTTP status code 451 might lead to an increase in
       blocking because it makes analyzing compliance easier.
 
-10.  What are features of a blocking reporting infrastructure that would
-     be useful?
+6.  What are features of a blocking reporting infrastructure that would
+    be useful?
 
    -  The reporting format needs to cover information enough to satisfy
       transparency and offer insight about possible misuse of 451 error
@@ -432,8 +432,8 @@ Internet-Draft                451ImpReport                     July 2017
    - Contact information for relevant authority for the purposes of
    verification of procedural stage and appeal or redress opportunities.
 
-11.  What features of blocking events are supported by the existing 451
-     status code, and what features do we need to add?
+7.  What features of blocking events are supported by the existing 451
+    status code, and what features do we need to add?
 
    -  Guidance on the representation of HTTP status code for
       subresources in browsers
@@ -461,7 +461,7 @@ Internet-Draft                451ImpReport                     July 2017
       is linked on the page, but not loaded, is no longer available for
       legal reasons.
 
-12.  Appendix: Legal Realities
+8.  Appendix: Legal Realities
 
    In the light of the use cases outlined above underneath we are
    providing an overview of legal frameworks in a number of countries
@@ -471,11 +471,9 @@ Internet-Draft                451ImpReport                     July 2017
    that is makes the order or request is crucial in understanding the
    context and nature of the blockage.
 
-13.  Russia
+8.1.  Russia
 
-   Blocking by the government:
-
-13.1.  Federal Law of 27 July 2006
+8.1.1.  Blocking by government: Federal Law of 27 July 2006
 
    Law No. 149-FZ on Information, Information Technologies and
    Protection of Information and its amendments:
@@ -497,6 +495,8 @@ Internet-Draft                451ImpReport                     July 2017
    -  The law 398-FZ on immediate blockage of websites at the request of
       Prosecutor General (2013).
 
+   -  "Bloggers' amendment" 97-FZ (2014) - bloggers with more than 3000
+      need to register as mass media ("information distributors") and
 
 
 
@@ -506,8 +506,6 @@ Abraham, et al.         Expires January 16, 2018                [Page 9]
 Internet-Draft                451ImpReport                     July 2017
 
 
-   -  "Bloggers' amendment" 97-FZ (2014) - bloggers with more than 3000
-      need to register as mass media ("information distributors") and
       have the same responsibilities (including on what their readers
       post in comments).
 
@@ -526,15 +524,15 @@ Internet-Draft                451ImpReport                     July 2017
       well as information propagating racial, national or religious
       hatred or enmity or hatred towards any social group."
 
-13.2.  "Yarovaya laws"
+8.1.2.  "Yarovaya laws"
 
    This law was approved by the Parliament and, if passed, will oblige
    messaging apps to store messaging history and decrypt messages at
    prosecutors' request.
 
-14.  Chile
+8.2.  Chile
 
-14.1.  Blocking by courts
+8.2.1.  Blocking by courts
 
    The Law No. 20.435 (Copyright Act reform from 2010) contains a notice
    and take down procedure, for copyright infringements under which a
@@ -554,6 +552,8 @@ Internet-Draft                451ImpReport                     July 2017
    Telecommunications Act (Law No 18.168) new rules for internet service
    providers.  Among those rules the internet service providers "shall
    not block or interfere in any way with the rights of the user to use
+   any content, application or service on the internet; but they may
+
 
 
 
@@ -562,13 +562,12 @@ Abraham, et al.         Expires January 16, 2018               [Page 10]
 Internet-Draft                451ImpReport                     July 2017
 
 
-   any content, application or service on the internet; but they may
    take traffic management measures or block contents upon user requests
    (and to their cost)".
 
-15.  Iran
+8.3.  Iran
 
-15.1.  Blocking by government
+8.3.1.  Blocking by government
 
    The Committee Charged with Determining Offensive Content (CCDOC) is
    the official authority on censorship and blocking of web content in
@@ -585,7 +584,7 @@ Internet-Draft                451ImpReport                     July 2017
    Such a system enables a centralized filtering program for all
    Internet traffic in the country.
 
-15.2.  Blocking by courts
+8.3.2.  Blocking by courts
 
    In Iran, freedom of expression is regulated by the Penal Code and the
    Press Law of 1986.  The Press Law was amended in 2000 to mandate that
@@ -610,6 +609,7 @@ Internet-Draft                451ImpReport                     July 2017
    creation of a National Internet Network which would domestically host
    all accessible Internet content, isolating Iranian citizens from the
    World Wide Web. Implementation of the national network would make it
+   easier for the government to block services and web pages through
 
 
 
@@ -618,14 +618,13 @@ Abraham, et al.         Expires January 16, 2018               [Page 11]
 Internet-Draft                451ImpReport                     July 2017
 
 
-   easier for the government to block services and web pages through
    measures such as intelligent filtering.  Already the use of social
    networking platforms such as Facebook, Instagram and Viber is heavily
    monitored and controlled.
 
-16.  India
+8.4.  India
 
-16.1.  Blocking by the government
+8.4.1.  Blocking by the government
 
    Under Section 69A of Information Technology Act 2000, the executive
    branch of the government has "the power to issue directions for
@@ -646,7 +645,7 @@ Internet-Draft                451ImpReport                     July 2017
    if users try to access the blocked resources and other ISPs returning
    a 404 Error Code.
 
-16.2.  Blocking by courts
+8.4.2.  Blocking by courts
 
    Increasingly Indian courts are issuing ex-parte John Doe orders for
    website blocking.  These orders can be issued by courts for any
@@ -669,12 +668,13 @@ Internet-Draft                451ImpReport                     July 2017
 
 
 
+
 Abraham, et al.         Expires January 16, 2018               [Page 12]
 
 Internet-Draft                451ImpReport                     July 2017
 
 
-16.3.  Takedowns by web sites
+8.4.3.  Takedowns by web sites
 
    Under Section 79 of the Information Technology Act 2000, both the
    government and private parties can send take-down notices to web
@@ -685,9 +685,9 @@ Internet-Draft                451ImpReport                     July 2017
    infringement but they need to be followed by court orders otherwise
    the content can be reinstated.
 
-17.  United States of America
+8.5.  United States of America
 
-17.1.  Section 512 of the DMCA
+8.5.1.  Section 512 of the DMCA
 
    The United States Digital Millenium Copyright Act (DMCA) has a
    provision that has greatly shaped the landscape of online content
@@ -704,7 +704,7 @@ Internet-Draft                451ImpReport                     July 2017
    it has filed a lawsuite within 10-14 days or the website can
    reinstate the removed material.
 
-17.2.  Other US-based forms of takedown
+8.5.2.  Other US-based forms of takedown
 
    There are a number of other legal methods that are used with much
    less frequency in the United States:
@@ -753,7 +753,7 @@ Internet-Draft                451ImpReport                     July 2017
       States, there are regular claims made by patent holders against
       online content and services that they claim infringe their patent.
 
-18.  Informative References
+9.  Informative References
 
    [Censys]   Durumeric, Z., Adrian, D., Mirian, A., Bailey, M., and J.
               Halderman, "80.http.get.status_code: 451 - Censys", 2017,
@@ -855,9 +855,9 @@ Internet-Draft                451ImpReport                     July 2017
 
 
    Shivan Kaul Sahib
+   Cisco Systems
 
    EMail: shivankaulsahib@gmail.com
-
 
 
 
