@@ -15,7 +15,6 @@ Expires: January 16, 2018                             Derechos Digitales
                                                              C. Runnegar
                                                                     ISOC
                                                                 S. Sahib
-                                                           Cisco Systems
                                                            July 15, 2017
 
 
@@ -49,6 +48,7 @@ Copyright Notice
 
    Copyright (c) 2017 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
+
 
 
 
@@ -855,9 +855,9 @@ Internet-Draft                451ImpReport                     July 2017
 
 
    Shivan Kaul Sahib
-   Cisco Systems
 
    EMail: shivankaulsahib@gmail.com
+
 
 
 
