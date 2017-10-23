@@ -132,16 +132,14 @@ informative:
 
 --- abstract
 
-This report describes implementation experience between various components working with the HTTP Status Code 451 {{RFC7725}}, a risk assessment and recommendation for improvements.
+This report describes the experience of implementing various software components involving HTTP Status Code 451 {{RFC7725}}, provides a risk assessment for parties using the status code and makes recommendations for improvements to the protocol based on its studied usage.
 
 --- middle
 
 
-
-
 # Introduction
 
-This document evaluates the usage of HTTP Status Code 451, which was standardized by the IETF in February 2016 {{RFC7725}}. This implementation report aims to illuminate whether the status code does what it set out to do ("provide transparency in circumstances where issues of law or public policy affect server operations"), the different ways it is being used, positive and negative impacts the standard might have and we end with suggestions for improvement of the standard. 
+HTTP Status Code 451 was standardized by the IETF in February 2016 {{RFC7725}}. The goal of the status code was to provide a uniform mechanism for indicating to end-users that a web resource was being denied because of legal reasons. Later, an effort was made to build tooling around the status code so as to measure and report cases of its use, in order to illuminate whether the status code does what it purports to do ("provide transparency in circumstances where issues of law or public policy affect server operations"). This implementation report is an outcome of that effort and evaluates the usage of HTTP Status Code 451, delineates the positive and negative impacts the standard might have and suggests improvements of the standard.
 
 # Vocabulary
 
@@ -152,7 +150,7 @@ Resource
 : A top-level information object served by an HTTP server (e.g., HTML page).
 
 Subresource 
-: An information object served within the context of a top-level Resource (e.g., JavaScript, Image, etc.)
+: An information object served within the context of a top-level Resource (e.g., JavaScript, image, etc.)
 
 Server Operator 
 : An entity or an individual operating an HTTP server.
@@ -161,7 +159,7 @@ HTTP status
 : For each response, HTTP servers return a numerical status code (e.g., 400 (OK), 403 (unauthorized), etc.) described by IANA https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml.
 
  Response 
-: When an HTTP Server responds to a request, it sends a Response, made up of header fields and a body (See: https://tools.ietf.org/html/rfc7725#section-3 
+: When an HTTP Server responds to a request, it sends a Response, made up of header fields and a body (See: https://tools.ietf.org/html/rfc7725#section-3)
 
  Legal demand 
 : A verbal or written request grounded in law or regulation from an Authority to a Server Operator to Blocking a Resource.
@@ -180,7 +178,7 @@ HTTP status
 Server operators that are being confronted with an order from a legal authority can use the HTTP Status Code to communicate to third parties why the resource is not available on the server.
 
 ### Intermediaries 
-  Intermediaries such as Internet Service Providers, Content Distribution Networks and other might be obligated by a legal authority in their operational jurisdiction to filter certain content. The HTTP status code would add transparency to this practice.
+Intermediaries such as Internet Service Providers, Content Distribution Networks and others might be obligated by a legal authority in their operational jurisdiction to filter certain content. The HTTP status code would add transparency to this practice.
 
 ## Who is likely to use the 451 status code data?
 
