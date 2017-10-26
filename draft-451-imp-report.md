@@ -209,9 +209,9 @@ Several large content providers are now supporting the HTTP 451 Status Code, suc
 
 ## Trends and observations
 
-- The majority of instance of HTTP status code 451 provide no explanation in the response body.
+- The majority of instances of HTTP status code 451 provide no explanation in the response body.
 
-- There have been found several cases of servers serving HTTP status code 451 with redirect another server with a central warning message of a blocking authority.
+- There have been found several cases of servers serving HTTP status code 451 with redirect to another server with a central warning message of a blocking authority.
 
 - A registrar serves HTTP status code 451 when a registrant did not pay their domain fees.
 

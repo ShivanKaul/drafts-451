@@ -418,8 +418,8 @@
   <meta name="dct.creator" content="Abraham, S., Canales, MP., Hall, J., Khrustaleva, O., ten Oever, N., Runnegar, C., and S. Sahib" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-451-imp-report-00" />
   <meta name="dct.issued" scheme="ISO8601" content="2017-7-15" />
-  <meta name="dct.abstract" content="This report describes implementation experience between various components working with the HTTP Status Code 451 " />
-  <meta name="description" content="This report describes implementation experience between various components working with the HTTP Status Code 451 " />
+  <meta name="dct.abstract" content="This report describes the experience of implementing various software components involving HTTP Status Code 451 " />
+  <meta name="description" content="This report describes the experience of implementing various software components involving HTTP Status Code 451 " />
 
 </head>
 
@@ -493,7 +493,7 @@
   <span class="filename">draft-451-imp-report-00</span></p>
   
   <h1 id="rfc.abstract"><a href="#rfc.abstract">Abstract</a></h1>
-<p>This report describes implementation experience between various components working with the HTTP Status Code 451 <a href="#RFC7725" class="xref">[RFC7725]</a>, a risk assessment and recommendation for improvements.</p>
+<p>This report describes the experience of implementing various software components involving HTTP Status Code 451 <a href="#RFC7725" class="xref">[RFC7725]</a>, provides a risk assessment for parties using the status code and makes recommendations for improvements to the protocol based on its studied usage.</p>
 <h1 id="rfc.status"><a href="#rfc.status">Status of This Memo</a></h1>
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
@@ -587,7 +587,7 @@
   <h1 id="rfc.section.1">
 <a href="#rfc.section.1">1.</a> <a href="#introduction" id="introduction">Introduction</a>
 </h1>
-<p id="rfc.section.1.p.1">This document evaluates the usage of HTTP Status Code 451, which was standardized by the IETF in February 2016 <a href="#RFC7725" class="xref">[RFC7725]</a>. This implementation report aims to illuminate whether the status code does what it set out to do (&#8220;provide transparency in circumstances where issues of law or public policy affect server operations&#8221;), the different ways it is being used, positive and negative impacts the standard might have and we end with suggestions for improvement of the standard.</p>
+<p id="rfc.section.1.p.1">HTTP Status Code 451 was standardized by the IETF in February 2016 <a href="#RFC7725" class="xref">[RFC7725]</a>. The goal of the status code was to provide a uniform mechanism for indicating to end-users that a web resource was being denied because of legal reasons. Later, an effort was made to build tooling around the status code so as to measure and report cases of its use, in order to illuminate whether the status code does what it purports to do (&#8220;provide transparency in circumstances where issues of law or public policy affect server operations&#8221;). This implementation report is an outcome of that effort and evaluates the usage of HTTP Status Code 451, delineates the positive and negative impacts the standard might have and suggests improvements of the standard.</p>
 <h1 id="rfc.section.2">
 <a href="#rfc.section.2">2.</a> <a href="#vocabulary" id="vocabulary">Vocabulary</a>
 </h1>
@@ -599,13 +599,13 @@
 <dt>Resource</dt>
 <dd style="margin-left: 8">A top-level information object served by an HTTP server (e.g., HTML page).</dd>
 <dt>Subresource</dt>
-<dd style="margin-left: 8">An information object served within the context of a top-level Resource (e.g., JavaScript, Image, etc.)</dd>
+<dd style="margin-left: 8">An information object served within the context of a top-level Resource (e.g., JavaScript, image, etc.)</dd>
 <dt>Server Operator</dt>
 <dd style="margin-left: 8">An entity or an individual operating an HTTP server.</dd>
 <dt>HTTP status</dt>
 <dd style="margin-left: 8">For each response, HTTP servers return a numerical status code (e.g., 400 (OK), 403 (unauthorized), etc.) described by IANA https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml.</dd>
 <dt>Response</dt>
-<dd style="margin-left: 8">When an HTTP Server responds to a request, it sends a Response, made up of header fields and a body (See: https://tools.ietf.org/html/rfc7725#section-3</dd>
+<dd style="margin-left: 8">When an HTTP Server responds to a request, it sends a Response, made up of header fields and a body (See: https://tools.ietf.org/html/rfc7725#section-3)</dd>
 <dt>Legal demand</dt>
 <dd style="margin-left: 8">A verbal or written request grounded in law or regulation from an Authority to a Server Operator to Blocking a Resource.</dd>
 <dt>Authority</dt>
@@ -626,7 +626,7 @@
 <h1 id="rfc.section.3.1.2">
 <a href="#rfc.section.3.1.2">3.1.2.</a> <a href="#intermediaries" id="intermediaries">Intermediaries</a>
 </h1>
-<p id="rfc.section.3.1.2.p.1">Intermediaries such as Internet Service Providers, Content Distribution Networks and other might be obligated by a legal authority in their operational jurisdiction to filter certain content. The HTTP status code would add transparency to this practice.</p>
+<p id="rfc.section.3.1.2.p.1">Intermediaries such as Internet Service Providers, Content Distribution Networks and others might be obligated by a legal authority in their operational jurisdiction to filter certain content. The HTTP status code would add transparency to this practice.</p>
 <h1 id="rfc.section.3.2">
 <a href="#rfc.section.3.2">3.2.</a> <a href="#who-is-likely-to-use-the-451-status-code-data" id="who-is-likely-to-use-the-451-status-code-data">Who is likely to use the 451 status code data?</a>
 </h1>
@@ -665,8 +665,8 @@
 <p></p>
 
 <ul>
-<li>The majority of instance of HTTP status code 451 provide no explanation in the response body.</li>
-<li>There have been found several cases of servers serving HTTP status code 451 with redirect another server with a central warning message of a blocking authority.</li>
+<li>The majority of instances of HTTP status code 451 provide no explanation in the response body.</li>
+<li>There have been found several cases of servers serving HTTP status code 451 with redirect to another server with a central warning message of a blocking authority.</li>
 <li>A registrar serves HTTP status code 451 when a registrant did not pay their domain fees.</li>
 <li>There are significant observations of server serving HTTP status code 451 based on geoIP (especially for gambling sites).</li>
 <li>There are different understandings of the &#8216;blocked-by&#8217; field as defined in RFC7725. Some people interpret is as the entity that is doing the blocking, others are interpreting it at the authority responsible for ordering the blocking.</li>

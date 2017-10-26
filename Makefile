@@ -1,4 +1,4 @@
-DRAFTS = 451-imp-report new-protocol-elements-451
+DRAFTS = 451-imp-report 451-new-protocol-elements-01
 OUTPUTS = $(foreach draft,$(DRAFTS),draft-${draft}.html draft-${draft}.xml draft-${draft}.txt)
 STAGING = staging.xml
 

@@ -23,9 +23,11 @@ Expires: January 16, 2018                             Derechos Digitales
 
 Abstract
 
-   This report describes implementation experience between various
-   components working with the HTTP Status Code 451 [RFC7725], a risk
-   assessment and recommendation for improvements.
+   This report describes the experience of implementing various software
+   components involving HTTP Status Code 451 [RFC7725], provides a risk
+   assessment for parties using the status code and makes
+   recommendations for improvements to the protocol based on its studied
+   usage.
 
 Status of This Memo
 
@@ -44,10 +46,8 @@ Status of This Memo
 
    This Internet-Draft will expire on January 16, 2018.
 
-Copyright Notice
 
-   Copyright (c) 2017 IETF Trust and the persons identified as the
-   document authors.  All rights reserved.
+
 
 
 
@@ -57,6 +57,11 @@ Abraham, et al.         Expires January 16, 2018                [Page 1]
 
 Internet-Draft                451ImpReport                     July 2017
 
+
+Copyright Notice
+
+   Copyright (c) 2017 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
    Provisions Relating to IETF Documents
@@ -79,33 +84,28 @@ Table of Contents
      3.2.  Who is likely to use the 451 status code data?  . . . . .   4
        3.2.1.  Browser vendors . . . . . . . . . . . . . . . . . . .   4
        3.2.2.  End users . . . . . . . . . . . . . . . . . . . . . .   4
-       3.2.3.  Researchers . . . . . . . . . . . . . . . . . . . . .   4
-       3.2.4.  Civil society . . . . . . . . . . . . . . . . . . . .   4
-       3.2.5.  Governments . . . . . . . . . . . . . . . . . . . . .   4
+       3.2.3.  Researchers . . . . . . . . . . . . . . . . . . . . .   5
+       3.2.4.  Civil society . . . . . . . . . . . . . . . . . . . .   5
+       3.2.5.  Governments . . . . . . . . . . . . . . . . . . . . .   5
    4.  Current Usage . . . . . . . . . . . . . . . . . . . . . . . .   5
      4.1.  Overview  . . . . . . . . . . . . . . . . . . . . . . . .   5
      4.2.  Trends and observations . . . . . . . . . . . . . . . . .   6
-   5.  Potential negative or positive impacts  . . . . . . . . . . .   6
+   5.  Potential negative or positive impacts  . . . . . . . . . . .   7
    6.  What are features of a blocking reporting infrastructure that
-       would be useful?  . . . . . . . . . . . . . . . . . . . . . .   7
+       would be useful?  . . . . . . . . . . . . . . . . . . . . . .   8
    7.  What features of blocking events are supported by the
        existing 451 status code, and what features do we need to
-       add?  . . . . . . . . . . . . . . . . . . . . . . . . . . . .   8
+       add?  . . . . . . . . . . . . . . . . . . . . . . . . . . . .   9
    8.  Appendix: Legal Realities . . . . . . . . . . . . . . . . . .   9
      8.1.  Russia  . . . . . . . . . . . . . . . . . . . . . . . . .   9
        8.1.1.  Blocking by government: Federal Law of 27 July 2006 .   9
        8.1.2.  "Yarovaya laws" . . . . . . . . . . . . . . . . . . .  10
      8.2.  Chile . . . . . . . . . . . . . . . . . . . . . . . . . .  10
-       8.2.1.  Blocking by courts  . . . . . . . . . . . . . . . . .  10
+       8.2.1.  Blocking by courts  . . . . . . . . . . . . . . . . .  11
      8.3.  Iran  . . . . . . . . . . . . . . . . . . . . . . . . . .  11
        8.3.1.  Blocking by government  . . . . . . . . . . . . . . .  11
        8.3.2.  Blocking by courts  . . . . . . . . . . . . . . . . .  11
      8.4.  India . . . . . . . . . . . . . . . . . . . . . . . . . .  12
-       8.4.1.  Blocking by the government  . . . . . . . . . . . . .  12
-       8.4.2.  Blocking by courts  . . . . . . . . . . . . . . . . .  12
-       8.4.3.  Takedowns by web sites  . . . . . . . . . . . . . . .  13
-     8.5.  United States of America  . . . . . . . . . . . . . . . .  13
-       8.5.1.  Section 512 of the DMCA . . . . . . . . . . . . . . .  13
 
 
 
@@ -114,20 +114,29 @@ Abraham, et al.         Expires January 16, 2018                [Page 2]
 Internet-Draft                451ImpReport                     July 2017
 
 
-       8.5.2.  Other US-based forms of takedown  . . . . . . . . . .  13
+       8.4.1.  Blocking by the government  . . . . . . . . . . . . .  12
+       8.4.2.  Blocking by courts  . . . . . . . . . . . . . . . . .  13
+       8.4.3.  Takedowns by web sites  . . . . . . . . . . . . . . .  13
+     8.5.  United States of America  . . . . . . . . . . . . . . . .  13
+       8.5.1.  Section 512 of the DMCA . . . . . . . . . . . . . . .  13
+       8.5.2.  Other US-based forms of takedown  . . . . . . . . . .  14
    9.  Informative References  . . . . . . . . . . . . . . . . . . .  14
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  15
 
 1.  Introduction
 
-   This document evaluates the usage of HTTP Status Code 451, which was
-   standardized by the IETF in February 2016 [RFC7725].  This
-   implementation report aims to illuminate whether the status code does
-   what it set out to do ("provide transparency in circumstances where
-   issues of law or public policy affect server operations"), the
-   different ways it is being used, positive and negative impacts the
-   standard might have and we end with suggestions for improvement of
-   the standard.
+   HTTP Status Code 451 was standardized by the IETF in February 2016
+   [RFC7725].  The goal of the status code was to provide a uniform
+   mechanism for indicating to end-users that a web resource was being
+   denied because of legal reasons.  Later, an effort was made to build
+   tooling around the status code so as to measure and report cases of
+   its use, in order to illuminate whether the status code does what it
+   purports to do ("provide transparency in circumstances where issues
+   of law or public policy affect server operations").  This
+   implementation report is an outcome of that effort and evaluates the
+   usage of HTTP Status Code 451, delineates the positive and negative
+   impacts the standard might have and suggests improvements of the
+   standard.
 
 2.  Vocabulary
 
@@ -138,7 +147,7 @@ Internet-Draft                451ImpReport                     July 2017
       (e.g., HTML page).
 
    Subresource  An information object served within the context of a
-      top-level Resource (e.g., JavaScript, Image, etc.)
+      top-level Resource (e.g., JavaScript, image, etc.)
 
    Server Operator  An entity or an individual operating an HTTP server.
 
@@ -149,7 +158,17 @@ Internet-Draft                451ImpReport                     July 2017
 
    Response  When an HTTP Server responds to a request, it sends a
       Response, made up of header fields and a body (See:
-      https://tools.ietf.org/html/rfc7725#section-3
+      https://tools.ietf.org/html/rfc7725#section-3)
+
+
+
+
+
+
+Abraham, et al.         Expires January 16, 2018                [Page 3]
+
+Internet-Draft                451ImpReport                     July 2017
+
 
    Legal demand  A verbal or written request grounded in law or
       regulation from an Authority to a Server Operator to Blocking a
@@ -162,13 +181,6 @@ Internet-Draft                451ImpReport                     July 2017
    Complainant  A party making a Legal demand; may or may not be an
       Authority (e.g., the US DMCA allows a copyright holder to demand
       takedown).
-
-
-
-Abraham, et al.         Expires January 16, 2018                [Page 3]
-
-Internet-Draft                451ImpReport                     July 2017
-
 
 3.  Target audiences
 
@@ -183,7 +195,7 @@ Internet-Draft                451ImpReport                     July 2017
 3.1.2.  Intermediaries
 
    Intermediaries such as Internet Service Providers, Content
-   Distribution Networks and other might be obligated by a legal
+   Distribution Networks and others might be obligated by a legal
    authority in their operational jurisdiction to filter certain
    content.  The HTTP status code would add transparency to this
    practice.
@@ -202,6 +214,18 @@ Internet-Draft                451ImpReport                     July 2017
    content is not available due to other reasons (e.g., 404
    unavailable).
 
+
+
+
+
+
+
+
+Abraham, et al.         Expires January 16, 2018                [Page 4]
+
+Internet-Draft                451ImpReport                     July 2017
+
+
 3.2.3.  Researchers
 
    Researchers might want to scan for the prevalence of blocking, as
@@ -217,14 +241,6 @@ Internet-Draft                451ImpReport                     July 2017
    Governments might want to verify compliance with blocking orders and
    use HTTP status code 451 to do so on the networks in their
    jurisdiction.
-
-
-
-
-Abraham, et al.         Expires January 16, 2018                [Page 4]
-
-Internet-Draft                451ImpReport                     July 2017
-
 
 4.  Current Usage
 
@@ -257,6 +273,15 @@ Internet-Draft                451ImpReport                     July 2017
    3478;&#25919;&#31574;&#32780;&#19981;&#21487;&#29992;" (Chinese:
    "This site is not available due to national policy").
 
+
+
+
+
+Abraham, et al.         Expires January 16, 2018                [Page 5]
+
+Internet-Draft                451ImpReport                     July 2017
+
+
    The hosts that were observed implementing the status code are located
    in Russia, United States of America, Singapore, Czech Republic,
    Thailand, Netherlands, Portugal, Spain, Italy, Greece, Bulgaria,
@@ -273,15 +298,6 @@ Internet-Draft                451ImpReport                     July 2017
    which featured 526 IPv4 Hosts of which 17 were included in the list
    of "Top Million Websites".
 
-
-
-
-
-Abraham, et al.         Expires January 16, 2018                [Page 5]
-
-Internet-Draft                451ImpReport                     July 2017
-
-
    Several large content providers are now supporting the HTTP 451
    Status Code, such as [Github] and [Reddit], whereas other content
    providers such as [Twitter], [Facebook], and [Youtube] are currently
@@ -290,11 +306,11 @@ Internet-Draft                451ImpReport                     July 2017
 
 4.2.  Trends and observations
 
-   -  The majority of instance of HTTP status code 451 provide no
+   -  The majority of instances of HTTP status code 451 provide no
       explanation in the response body.
 
    -  There have been found several cases of servers serving HTTP status
-      code 451 with redirect another server with a central warning
+      code 451 with redirect to another server with a central warning
       message of a blocking authority.
 
    -  A registrar serves HTTP status code 451 when a registrant did not
@@ -310,6 +326,17 @@ Internet-Draft                451ImpReport                     July 2017
 
    -  HTTP Status Code 451 is thusfar only served by hosts, not by
       intermediaries.
+
+
+
+
+
+
+
+Abraham, et al.         Expires January 16, 2018                [Page 6]
+
+Internet-Draft                451ImpReport                     July 2017
+
 
 5.  Potential negative or positive impacts
 
@@ -330,14 +357,6 @@ Internet-Draft                451ImpReport                     July 2017
       sub-resources use error code 451.  This data could be used to
       produce a searchable open repository of all known error code 451
       instances.  This information could then be used to map the blocked
-
-
-
-Abraham, et al.         Expires January 16, 2018                [Page 6]
-
-Internet-Draft                451ImpReport                     July 2017
-
-
       Web and to analyze the explanations, looking for trends and
       anomalies.  For example, one day there might be an answer to the
       question - "how much content is blocked for IPR reasons?"
@@ -366,6 +385,15 @@ Internet-Draft                451ImpReport                     July 2017
       compelled to use another status code (e.g. 404).  In these
       circumstances, content providers and intermediaries should include
       information in their transparency reports to indicate whether this
+
+
+
+
+Abraham, et al.         Expires January 16, 2018                [Page 7]
+
+Internet-Draft                451ImpReport                     July 2017
+
+
       is happening, by, for example, stating: "We have/have not been
       required to replace 451 by other status codes."
 
@@ -386,14 +414,6 @@ Internet-Draft                451ImpReport                     July 2017
 
    -  Transparency requirement will be better served through
       standardization of fields and descriptions.  Currently many
-
-
-
-Abraham, et al.         Expires January 16, 2018                [Page 7]
-
-Internet-Draft                451ImpReport                     July 2017
-
-
       implementations for HTTP status code 451 do not provide the reason
       for blocking.  This could be attributed to the fact that the
       different needs are not sufficiently documented in RFC7725.  This
@@ -421,6 +441,15 @@ Internet-Draft                451ImpReport                     July 2017
    province.  Therefore country codes may not be sufficient to describe
    the geographical scope.
 
+
+
+
+
+Abraham, et al.         Expires January 16, 2018                [Page 8]
+
+Internet-Draft                451ImpReport                     July 2017
+
+
    - Date of block order and time-period for which the block has to be
    enforced.
 
@@ -441,15 +470,6 @@ Internet-Draft                451ImpReport                     July 2017
    -  Guidance on the implementation of HTTP status code 451 could lead
       to an increase in adoption.  RFC7725 provides high level advice
       but still leaves space for interpretation.  An implementation
-
-
-
-
-Abraham, et al.         Expires January 16, 2018                [Page 8]
-
-Internet-Draft                451ImpReport                     July 2017
-
-
       guide in conjunction with an adoption campaign might lead to
       increased adoption.
 
@@ -478,6 +498,14 @@ Internet-Draft                451ImpReport                     July 2017
    Law No. 149-FZ on Information, Information Technologies and
    Protection of Information and its amendments:
 
+
+
+
+Abraham, et al.         Expires January 16, 2018                [Page 9]
+
+Internet-Draft                451ImpReport                     July 2017
+
+
    -  "Blacklist" law 139-FZ (2012) - allowing to block websites if they
       appear to have dangerous information for children such as
       information about suicide and drugs.  The blocking was often done
@@ -497,15 +525,6 @@ Internet-Draft                451ImpReport                     July 2017
 
    -  "Bloggers' amendment" 97-FZ (2014) - bloggers with more than 3000
       need to register as mass media ("information distributors") and
-
-
-
-
-Abraham, et al.         Expires January 16, 2018                [Page 9]
-
-Internet-Draft                451ImpReport                     July 2017
-
-
       have the same responsibilities (including on what their readers
       post in comments).
 
@@ -532,6 +551,17 @@ Internet-Draft                451ImpReport                     July 2017
 
 8.2.  Chile
 
+
+
+
+
+
+
+Abraham, et al.         Expires January 16, 2018               [Page 10]
+
+Internet-Draft                451ImpReport                     July 2017
+
+
 8.2.1.  Blocking by courts
 
    The Law No. 20.435 (Copyright Act reform from 2010) contains a notice
@@ -553,15 +583,6 @@ Internet-Draft                451ImpReport                     July 2017
    providers.  Among those rules the internet service providers "shall
    not block or interfere in any way with the rights of the user to use
    any content, application or service on the internet; but they may
-
-
-
-
-Abraham, et al.         Expires January 16, 2018               [Page 10]
-
-Internet-Draft                451ImpReport                     July 2017
-
-
    take traffic management measures or block contents upon user requests
    (and to their cost)".
 
@@ -589,6 +610,14 @@ Internet-Draft                451ImpReport                     July 2017
    In Iran, freedom of expression is regulated by the Penal Code and the
    Press Law of 1986.  The Press Law was amended in 2000 to mandate that
    publishing online without a license was grounds for blocking,
+
+
+
+Abraham, et al.         Expires January 16, 2018               [Page 11]
+
+Internet-Draft                451ImpReport                     July 2017
+
+
    effectively censoring services such as Google, Facebook and Twitter.
    Iran also has Internet-specific laws, such as the 2001 resolution
    called "Regulations and Conditions Related to Computerized
@@ -610,14 +639,6 @@ Internet-Draft                451ImpReport                     July 2017
    all accessible Internet content, isolating Iranian citizens from the
    World Wide Web. Implementation of the national network would make it
    easier for the government to block services and web pages through
-
-
-
-Abraham, et al.         Expires January 16, 2018               [Page 11]
-
-Internet-Draft                451ImpReport                     July 2017
-
-
    measures such as intelligent filtering.  Already the use of social
    networking platforms such as Facebook, Instagram and Viber is heavily
    monitored and controlled.
@@ -645,6 +666,14 @@ Internet-Draft                451ImpReport                     July 2017
    if users try to access the blocked resources and other ISPs returning
    a 404 Error Code.
 
+
+
+
+Abraham, et al.         Expires January 16, 2018               [Page 12]
+
+Internet-Draft                451ImpReport                     July 2017
+
+
 8.4.2.  Blocking by courts
 
    Increasingly Indian courts are issuing ex-parte John Doe orders for
@@ -661,18 +690,6 @@ Internet-Draft                451ImpReport                     July 2017
    Electronics and Information Technology who will then forward it to
    ISPs.  Or alternatively complainants could also send court orders
    directly to ISPs without following the procedure described above.
-
-
-
-
-
-
-
-
-Abraham, et al.         Expires January 16, 2018               [Page 12]
-
-Internet-Draft                451ImpReport                     July 2017
-
 
 8.4.3.  Takedowns by web sites
 
@@ -704,6 +721,15 @@ Internet-Draft                451ImpReport                     July 2017
    it has filed a lawsuite within 10-14 days or the website can
    reinstate the removed material.
 
+
+
+
+
+Abraham, et al.         Expires January 16, 2018               [Page 13]
+
+Internet-Draft                451ImpReport                     July 2017
+
+
 8.5.2.  Other US-based forms of takedown
 
    There are a number of other legal methods that are used with much
@@ -722,14 +748,6 @@ Internet-Draft                451ImpReport                     July 2017
 
    -  Non-consensual sexually-explicit imagery: A number of content
       providers and online content hosts (intermediaries) have begun to
-
-
-
-Abraham, et al.         Expires January 16, 2018               [Page 13]
-
-Internet-Draft                451ImpReport                     July 2017
-
-
       honor request to take down material that may include sexually-
       explicit imagery that was either captured without consent or
       shared online without consent (cite).
@@ -760,6 +778,14 @@ Internet-Draft                451ImpReport                     July 2017
               <https://www.censys.io/
               ipv4?q=80.http.get.status_code%3A+451>.
 
+
+
+
+Abraham, et al.         Expires January 16, 2018               [Page 14]
+
+Internet-Draft                451ImpReport                     July 2017
+
+
    [ElManzalawy]
               El Manzalawy, M., "Should the Mugshot Industry be
               Regulated? States Push Legislation to Protect Individuals
@@ -775,16 +801,6 @@ Internet-Draft                451ImpReport                     July 2017
    [Github]   Torikian, G., "The 451 status code is now supported",
               2016, <https://developer.github.com/changes/2016-03-17-
               the-451-status-code-is-now-supported/>.
-
-
-
-
-
-
-Abraham, et al.         Expires January 16, 2018               [Page 14]
-
-Internet-Draft                451ImpReport                     July 2017
-
 
    [Quilter]  Urban, J., "Efficient Process or Chilling Effects?
               Takedown Notices Under Section 512 of the Digital
@@ -816,6 +832,16 @@ Authors' Addresses
    EMail: sunil@cis-india.org
 
 
+
+
+
+
+
+Abraham, et al.         Expires January 16, 2018               [Page 15]
+
+Internet-Draft                451ImpReport                     July 2017
+
+
    Maria Paz Canales
    Derechos Digitales
 
@@ -834,14 +860,6 @@ Authors' Addresses
    EMail: ok4193a@student.american.edu
 
 
-
-
-
-Abraham, et al.         Expires January 16, 2018               [Page 15]
-
-Internet-Draft                451ImpReport                     July 2017
-
-
    Niels ten Oever
    ARTICLE 19
 
@@ -857,24 +875,6 @@ Internet-Draft                451ImpReport                     July 2017
    Shivan Kaul Sahib
 
    EMail: shivankaulsahib@gmail.com
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

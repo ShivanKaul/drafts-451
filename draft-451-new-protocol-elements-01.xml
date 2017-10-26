@@ -15,10 +15,10 @@
 <?rfc inline="yes"?>
 <?rfc text-list-symbols="-o*+"?>
 
-<rfc docName="draft-new-protocol-elements-451" category="info">
+<rfc ipr="trust200902" docName="draft-451-new-protocol-elements-01" category="info">
 
   <front>
-    <title>New protocol elements for HTTP Status Code 451</title>
+    <title abbrev="New elements for HTTP 451">New protocol elements for HTTP Status Code 451</title>
 
     <author initials="S.K." surname="Sahib" fullname="Shivan Kaul Sahib">
       <organization></organization>
@@ -27,17 +27,17 @@
       </address>
     </author>
 
-    <date year="2017" month="October" day="12"/>
+    <date year="2017" month="October" day="24"/>
 
     <area>IRTF</area>
-    <workgroup>Human Rights Protocol Considerations Research Group</workgroup>
+    <workgroup>HTTP Working Group</workgroup>
     <keyword>Internet-Draft</keyword>
 
     <abstract>
 
 
 <t>This draft recommends protocol updates to Hypertext Transfer Protocol (HTTP) status
-code 451 <xref target="RFC7725"/> based on an examination of how the new status code is being used by parties involved in denial of Internet resources because of legal demands.</t>
+code 451 (defined by RFC7725) based on an examination of how the new status code is being used by parties involved in denial of Internet resources because of legal demands.</t>
 
 
 
@@ -50,9 +50,15 @@ code 451 <xref target="RFC7725"/> based on an examination of how the new status 
 
 
 <section anchor="introduction" title="Introduction">
+
 <t><xref target="RFC7725"/> was standardized by the IETF in February 2016. It defined HTTP status code 451 - to be used when a “a server operator has received a legal demand to deny access to a resource or to a set of resources that includes the requested resource”. The intention was to provide a uniform mechanism to indicate online censorship.</t>
 
-<t>Subsequently, an effort was made to investigate usage of 451 status code and evaluate if it fulfills its mandate of “provid[ing] transparency in circumstances where issues of law or public policy affect server operations” <xref target="IMPL_REPORT"/>. This draft attempts to explicate the protocol recommendations arising out of that investigation.</t>
+<t>Subsequently, an effort was made to investigate usage of 451 status code and evaluate if it fulfills its mandate of providing “transparency in circumstances where issues of law or public policy affect server operations” <xref target="IMPL_REPORT_DRAFT"/>. This draft attempts to explicate the protocol recommendations arising out of that investigation.</t>
+
+</section>
+<section anchor="requirements" title="Requirements">
+
+<t>The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” in this document are to be interpreted as described in <xref target="RFC2119"/>.</t>
 
 </section>
 <section anchor="existing-protocol-elements" title="Existing Protocol Elements">
@@ -62,7 +68,7 @@ code 451 <xref target="RFC7725"/> based on an examination of how the new status 
 <t><list style="symbols">
   <t>A server can return status code 451 to indicate that it is denying access to a resource or multiple resources on account of a legal demand.</t>
   <t>Responses using the status code SHOULD include an explanation in the response body of the details of the legal demand.</t>
-  <t>Responses SHOULD include a “Link” HTTP header field <xref target="RFC5988"/> whose value is a URI reference <xref target="RFC3986"/> identifying itself.  The “Link” header field MUST have a “rel” parameter whose value is “blocked-by”. The intent is that the header be used to identify the entity actually implementing blockage, not any other entity mandating it.</t>
+  <t>Responses SHOULD include a “Link” HTTP header field <xref target="RFC8288"/> whose value is a URI reference <xref target="RFC3986"/> identifying itself.  The “Link” header field MUST have a “rel” parameter whose value is “blocked-by”. The intent is that the header be used to identify the entity actually implementing blockage, not any other entity mandating it.</t>
 </list></t>
 
 </section>
@@ -74,8 +80,14 @@ code 451 <xref target="RFC7725"/> based on an examination of how the new status 
 </list></t>
 
 </section>
+<section anchor="security-considerations" title="Security Considerations">
+
+<t>This document does not add additional security considerations to <xref target="RFC7725"/>.</t>
+
+</section>
 <section anchor="iana-considerations" title="IANA Considerations">
-<t>The Link Relation Type Registry should be updated with the following entry:</t>
+
+<t>The Link Relation Type Registry should be updated with the following entry [TBD]:</t>
 
 <t><list style="symbols">
   <t>Relation Name: blocking-authority</t>
@@ -83,7 +95,7 @@ code 451 <xref target="RFC7725"/> based on an examination of how the new status 
   <t>Reference: This document</t>
 </list></t>
 
-<t>In addition, IANA should be updated with the following provisional header:</t>
+<t>In addition, IANA should be updated with the following provisional header [TBD]:</t>
 
 <t><list style="symbols">
   <t>Header field name: geo-scope-block</t>
@@ -105,6 +117,20 @@ code 451 <xref target="RFC7725"/> based on an examination of how the new status 
 
 
 
+<reference  anchor="RFC2119" target='https://www.rfc-editor.org/info/rfc2119'>
+<front>
+<title>Key words for use in RFCs to Indicate Requirement Levels</title>
+<author initials='S.' surname='Bradner' fullname='S. Bradner'><organization /></author>
+<date year='1997' month='March' />
+<abstract><t>In many standards track documents several words are used to signify the requirements in the specification.  These words are often capitalized. This document defines these words as they should be interpreted in IETF documents.  This document specifies an Internet Best Current Practices for the Internet Community, and requests discussion and suggestions for improvements.</t></abstract>
+</front>
+<seriesInfo name='BCP' value='14'/>
+<seriesInfo name='RFC' value='2119'/>
+<seriesInfo name='DOI' value='10.17487/RFC2119'/>
+</reference>
+
+
+
 <reference  anchor="RFC7725" target='https://www.rfc-editor.org/info/rfc7725'>
 <front>
 <title>An HTTP Status Code to Report Legal Obstacles</title>
@@ -117,7 +143,7 @@ code 451 <xref target="RFC7725"/> based on an examination of how the new status 
 </reference>
 
 
-<reference anchor="IMPL_REPORT" target="https://tools.ietf.org/html/draft-451-imp-report-00">
+<reference anchor="IMPL_REPORT_DRAFT" target="https://tools.ietf.org/html/draft-451-imp-report-00">
   <front>
     <title>Implementation Report for HTTP Status Code 451</title>
     <author initials="S." surname="Abraham">
@@ -164,15 +190,15 @@ code 451 <xref target="RFC7725"/> based on an examination of how the new status 
 
 
 
-<reference  anchor="RFC5988" target='https://www.rfc-editor.org/info/rfc5988'>
+<reference  anchor="RFC8288" target='https://www.rfc-editor.org/info/rfc8288'>
 <front>
 <title>Web Linking</title>
 <author initials='M.' surname='Nottingham' fullname='M. Nottingham'><organization /></author>
-<date year='2010' month='October' />
-<abstract><t>This document specifies relation types for Web links, and defines a registry for them.  It also defines the use of such links in HTTP headers with the Link header field.  [STANDARDS-TRACK]</t></abstract>
+<date year='2017' month='October' />
+<abstract><t>This specification defines a model for the relationships between resources on the Web (&quot;links&quot;) and the type of those relationships (&quot;link relation types&quot;).</t><t>It also defines the serialisation of such links in HTTP headers with the Link header field.</t></abstract>
 </front>
-<seriesInfo name='RFC' value='5988'/>
-<seriesInfo name='DOI' value='10.17487/RFC5988'/>
+<seriesInfo name='RFC' value='8288'/>
+<seriesInfo name='DOI' value='10.17487/RFC8288'/>
 </reference>
 
 
@@ -186,45 +212,49 @@ code 451 <xref target="RFC7725"/> based on an examination of how the new status 
   </back>
 
 <!-- ##markdown-source:
-H4sIAC5z51kAA41X247bNhB911cM/NKkjZxLm5uBAg02SXeb28LrPBVFQFOU
-RSxFqiRlxwny7z1DSl55N1tkHxbmbThz5swZqizLIupo1ILeqx113kUnnSFl
-VKtsDFQ7T6er1TldRBH7QCeuUvTb44dF5aQVLc5VXtSxtGpXjqfL8XSZNoqI
-XY8ePHxaPnxQPnxUSExsnN8vSNvaFYXwSizobLl6Xeycv9x413cLOu1bYWmp
-Nw28OB/9OnE26Ep5ETV+0VIFJbxs6E8+VFyqPSxUMGaj8lbF8iU7VxQhClt9
-EsZZuLJXoej0ggoiX0tVhbg3wzQRrpn81LZCHONEcD56VYfDeN8eDaPX8rBZ
-ujZhMI61NdpeXaM+x9LoEEsYWTuDbaX7+ReA0cfG+UVRYhPxKaxczN/M6UI0
-ep0nM+4Xjd4CoTeiN9NF1QptFhTS6iUWA6/9seHpOZwqCut8C/y2alHgyPL1
-ydOnjx6n32fvzt9+Wr46/7BcLZK1gRqzs7bLKU24A/YOUNzKjVk6e5X3NBwD
-S05SOUZGL9ZeNKI9nn93PqcTYYVJYE0W/prTqTDmePLDnN40vkeSjdqK47X3
-c2Bt6YPaKn+8cjKnZW+t2gh/3akjuKPwG4W0NjF2YXH/fnRI11yrWM+d39xv
-Ymvu5xpA6KVuu9IneMoHD4oB4F+fP3uSIx8mHj9/9myc4CKYJgRTZVmSWINP
-QoK8q0aHXGXkVaZVFa5Kte8Y6QC60um+U56pRSsvbKiVv6qcO5ypuyApp6qQ
-Q6ro69eBAN++0VoEVRHyC1qpz6LVNqfb1dS4HcVGEcp8MEHJBDxbK2031PPR
-9Z464aOGN9pundliTltCDWlh2MxYlwgkuN5LxcelwGFeNciFwW4UfhXmRcah
-1VVlFAY4613VS3ap+H3yV0xj2IlAqdqFr/SX7BM7fvZq9Zp9ea3Wvhd+z8R8
-MqeziPtqFGaVmTyNjeEpGda1yuHtGjBJ0ExQUB58ItexEqEKGtyK3CjNEYuj
-QNgAANiTkAg3pUkcwiecTRMBmACBK1hiIyL8laav0khh7d9ehYgLxl2zOa2w
-oAGqTYni4GEO1NhCJGG2t5rJRa2SjbA6tLwMUdOswcg0SxJJZaFsEIxuDu5d
-9OvAN9lo9vcSE+qai51ttwJWk4UtPNEbNtIHsUnZY7im8HHsKEfT8y5dk4Zg
-9KbWxoAdkY3ZKnlR0yx7/DeI9A9Fpi5opKzcc8ak9rJvOaeMC3LgmXYBWCTO
-iB2D2PVroyV1Dv8BdV0rGY+zxP1iBrpPNO7bNwbwUFwiRtV2MUGoPncmg8TQ
-H2rtUH9D/xFeB2a/61P6hqSN4GALs/jVZ+g87zrU4quhPx7TuOBkHiH4P1QO
-nZK61gM3ameM2/Edh8Y9LYoSpUQvRjwkkupV7L29QfcpO3IwkUuc+cvGb6Nw
-25uo0SEm/GUVkdL1NgFzXBJzeIPO3QFB7OwTgvFa7BenHz6+fTlWQFakzohB
-kUCLXBLZCK1dtc8JULgjotWFcXj7xdevoNlbbS9nWQgaBa57AsKmyliyZrPA
-NA4XMq+T+gn6uDyDI9BaEFblraz32Kr58aDrBB0Yr0w9p1Sxw0VHd7z7eLGC
-jmyTI16ZGUspGj0E8/qds7Vx8lJV5Xp/JAG8lrLGcQ/GR+3izA7upGX+GVmU
-Yo9+ikIbOzw7m+yjrO+RdagLiJfDGT8eypWbo2KCL4+r4hqrS6g+iarSKXPw
-g6+fhjC4msQmYX9I607H5gZHbzAj+3Zr8naNxgORFfoHgUVgZX6tINgZ94if
-AuMDFRQAmfU8F3SvQwOA406pzMcDiKw6mX7J4r0khjw82M2JGjSwuto6UrvW
-PkQC46UaREpf9Ups4P87h+LbQNe/DHLU8ms55WydhSsgTvQwQRuHyrfsGt05
-3JVKenToLhDuARfEXqZ6O/TqC8iGxtx5bis+W7gt1rvfbXgS7xKh7UEg0GnK
-73dcjtRKfBKwLICYk+fFTcOTZ8T4dtkot/GiQ9JR9mfnuT6CRBPIbmY54/cI
-fgUHHugW50EPfgbgwrS3osQXyZmCwIncU21OxkR4BjJKZ1N4w76AbOCCgYaJ
-xUduHdxJiKGEzl68f3Ht2+a4ivhSJjjky2QJXOGth9EGVMRrJjQpeVztXWZU
-uvVab8ALar8okggOVt6nT4mbtMeelypIrzvehg+qrB1jv7lGYy6u1JInRM5a
-O8jiYuizDp0chvgxd5CEe5Si/6EIbqKbwjmd1nv+OgLeZYK5TN5w/+tSS1+b
-q36eH/VYyx8wi6l9ns09VmaoRufvhLuLgUdjOP8Btl5y/0YPAAA=
+H4sIANJF8lkAA41XW3PbuBl956/AqA8bt6Ziu7ubRE91fVlr41slZTo7nU4G
+JEERYxDgAqAUbSb/vecDSIm0486+2MTtw3c553xQmqaJl16JGbsXW9ZY401u
+FBNK1EJ7x0pj2c1q9ciWnvvWsQtTCPbjT6cJzzIrNvHYy920ozC55jUsF5aX
+PsVUqsU27e9I+1PpCfZyj41nJ6fv0tOT9OzHJMfE2tjdjEldmiThVvAZmy9W
+14ls7Ix52zp/dnLy4eQs2Rr7tLambWbx8n9jLPWa/UJzyZPYYUOBw9oLq4VP
+L8mfJHGe6+IzV0bj6p1wSSNnLGHMlrkonN+pbpox+Dv4lLqA2/2EM9ZbUbr9
+eFePht7KfL85N3UIuR9LraQ+XCO++FRJ51MYyYzCttT89W8IvvWVsbMkxSZG
+p7CynH6csiWvZBYnY6qXldxwzT7yVg0XRc2lmjEXVp+w6GjtH2uansKpJNHG
+1tzLjZglOLK4vjg7Pf3Qf797d/ZT+J7fPd5+Xlw9PixWny8X59erWbDfIWgy
+r5tYU1gymi1Eg+S8CqFJOHuofBj2oQa3WdrHys4zyytej+fvHqfsgmuuQvoG
+C79O2Q1Xajz5MGUfK4IN9m/4eO1+iuxr9iA2wo5XLqZs0Wot1tw+d2pUAM/t
+WqDQlfeNm7196w0KOJXCl1Nj128rX6u3ByLIukltSE96cpJ0af77h/c/x8i7
+ifdn79/3E0SDYYkwlaYp4xkQxnPAeVVJF6nGrIhAK9yB0W1DmXYAMLvZNcIS
+2NjKcu1KYdljv+0NVeoIsKVSJXlXKvamECWQWrBs1wPiiGXcYQaFBuLEF15L
+HetuSlaZLfOVYCB8Z4sFW3AxE8TN1kVjDbdewi2pN0ZtMCc1A70kV2Smpywi
+cqa1uaDjOcdhWlUoisLuGjx20yQmpJZFoQQGf6HT1hRtTk4lydevnePfvrEt
+dyzQn9tC/hE9IXfnV6tr8uBaZLbldke4/HnK5p718QcgDyOi7KSU1UzEoLYV
+gMTZhDMnLODEDLLNPUhQ4VaURkiKk4/cJwMIe8d4jiBDlfg+aIazYcIhE4j7
+kAxfcQ9/c9UWYSSw9nsrnMcF/a7JlK2wIJFKHcpDwcMckLGRCICzVkvCFqtF
+XnEtXU3LUDlJIoz6kkaxXGhIHRSkmQJ6yzZzdJP2ancc6l+WxHWyXXNYDRY2
+8ESuyUjr+DrUjNI1TB/FDjaqlnbJkknoRatKqRQw4cmYLoIXZecwgWfiCbeA
+jtD5juqVS5u3NVWUsoIKWIKaQyYCTviWUti0mZI5awz+ItFlKXI/rhGy4ybs
+69cXMvftGyVxzy/uvagbH9IovjQqJorSv6fbnoLRKuNWOnLdtKGEXeH6BGHL
+NEB2gaRKG/siUVowtC9G/cuxyd2n5WpyHP+z+4fwvbj616f54uqSvpc357e3
++49+x/Lm4dPt5eHrcPLi4e7u6v4yHr47/21yHMoxeXhczR/uz28nlFofwjZI
+L3xCGKLDOuHJNlYQ1FB04C+3MosEDlSjBoK8hbCuvqCrUfh7nblSwyBHiPg/
+1HSNyGUpO6yXRimzJbP7B8iQ5CkEgZ33Fc4BUnjbWv2CvkO0x8J4EiriIxl/
+jZJ1q7xEwxvwkbQwz02rQ5HHFJ/Cm4VwDdCAnW1Ag38We1ehjtFRVxvFO10N
+1QjXBSMsM8UugkngDo9e7vrh6xc/v4JNbqV+mkRhqwS4axkyrIqYS2pBJJiV
+wYXE06DhnH1azOEIWgcoKOJWal/YKul1JMuQOjBYqHLKggJ1F43uCFCu+CY4
+YoWaUEPASwbYen7nJFMmfxJFmu1GkkZroWoUd2e812KqbOdOWKZPTyLrWzwP
+IB39g4WcDfYhU8dMGyAdYmxwxvaHohLFqHqyjjhOcJsDAEUhQ7lwOd059Lvz
+LyhmSPi+llvpqxfAfAGH6NCrFdtWMq9Cm/mT2UQ0aXxxIcIJNbofHCUFUs6R
+WWpKkbitdBWy6rdCRBDuM0fiGTEXLEYJoeHebqxOJ+TFYWuP51Ja5xlgnotO
+ZeWhzWMD/d0aMG6N5vRHp6e1XFc+FCqLyusQJxoxZ2sDuuugVm/2dwUe9w4d
+IcMt0oWOlQeS7Z8ZS2iFxNxj7I02Wngt1qPvdu0cbysu9V4V0C7T7z8bKFKd
+44cNaQHQOHgZvTQ8eAH1z661MGvLGxQdXJ8/RlK4HL0suhk1jJ5S+HIGOJA1
+zgMe9JbBhWFvkG+4TZWCqvHYZ3UsxkBtOjDmRofwun0O1cAFHQwDikdu7d0J
+GZsSbZYibwMuLmCXstzTZzVqNYWBr4GJRbEnFVnsj+ej45SjgfqHm+bn9+ff
+uUUwIhDoq6KurvAexmgNqOPJ56oADpKQJiI2RPWs4Wja+p/VPy//O0uCvna2
+7sPPsJfkwp7L0CIb2oYfo1GW+lb2jCxE4fB+GdAlyninuDM2SlaSDITnOMb9
+p+L4Tg0PQd0MtSX+vkRt01DSNPhEDbYJ759MHR4/8UcQ1uIPvtnwFpqNTTyP
+CetDeOOOZuPHRvI/OMR5G50QAAA=
 
 -->
 
