@@ -1,0 +1,732 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head profile="http://www.w3.org/2006/03/hcard http://dublincore.org/documents/2008/08/04/dc-html/">
+  <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
+
+  <title>New protocol elements for HTTP Status Code 451</title>
+
+  <style type="text/css" title="Xml2Rfc (sans serif)">
+  /*<![CDATA[*/
+	  a {
+	  text-decoration: none;
+	  }
+      /* info code from SantaKlauss at http://www.madaboutstyle.com/tooltip2.html */
+      a.info {
+          /* This is the key. */
+          position: relative;
+          z-index: 24;
+          text-decoration: none;
+      }
+      a.info:hover {
+          z-index: 25;
+          color: #FFF; background-color: #900;
+      }
+      a.info span { display: none; }
+      a.info:hover span.info {
+          /* The span will display just on :hover state. */
+          display: block;
+          position: absolute;
+          font-size: smaller;
+          top: 2em; left: -5em; width: 15em;
+          padding: 2px; border: 1px solid #333;
+          color: #900; background-color: #EEE;
+          text-align: left;
+      }
+	  a.smpl {
+	  color: black;
+	  }
+	  a:hover {
+	  text-decoration: underline;
+	  }
+	  a:active {
+	  text-decoration: underline;
+	  }
+	  address {
+	  margin-top: 1em;
+	  margin-left: 2em;
+	  font-style: normal;
+	  }
+	  body {
+	  color: black;
+	  font-family: verdana, helvetica, arial, sans-serif;
+	  font-size: 10pt;
+	  max-width: 55em;
+	  
+	  }
+	  cite {
+	  font-style: normal;
+	  }
+	  dd {
+	  margin-right: 2em;
+	  }
+	  dl {
+	  margin-left: 2em;
+	  }
+	
+	  ul.empty {
+	  list-style-type: none;
+	  }
+	  ul.empty li {
+	  margin-top: .5em;
+	  }
+	  dl p {
+	  margin-left: 0em;
+	  }
+	  dt {
+	  margin-top: .5em;
+	  }
+	  h1 {
+	  font-size: 14pt;
+	  line-height: 21pt;
+	  page-break-after: avoid;
+	  }
+	  h1.np {
+	  page-break-before: always;
+	  }
+	  h1 a {
+	  color: #333333;
+	  }
+	  h2 {
+	  font-size: 12pt;
+	  line-height: 15pt;
+	  page-break-after: avoid;
+	  }
+	  h3, h4, h5, h6 {
+	  font-size: 10pt;
+	  page-break-after: avoid;
+	  }
+	  h2 a, h3 a, h4 a, h5 a, h6 a {
+	  color: black;
+	  }
+	  img {
+	  margin-left: 3em;
+	  }
+	  li {
+	  margin-left: 2em;
+	  margin-right: 2em;
+	  }
+	  ol {
+	  margin-left: 2em;
+	  margin-right: 2em;
+	  }
+	  ol p {
+	  margin-left: 0em;
+	  }
+	  p {
+	  margin-left: 2em;
+	  margin-right: 2em;
+	  }
+	  pre {
+	  margin-left: 3em;
+	  background-color: lightyellow;
+	  padding: .25em;
+	  }
+	  pre.text2 {
+	  border-style: dotted;
+	  border-width: 1px;
+	  background-color: #f0f0f0;
+	  width: 69em;
+	  }
+	  pre.inline {
+	  background-color: white;
+	  padding: 0em;
+	  }
+	  pre.text {
+	  border-style: dotted;
+	  border-width: 1px;
+	  background-color: #f8f8f8;
+	  width: 69em;
+	  }
+	  pre.drawing {
+	  border-style: solid;
+	  border-width: 1px;
+	  background-color: #f8f8f8;
+	  padding: 2em;
+	  }
+	  table {
+	  margin-left: 2em;
+	  }
+	  table.tt {
+	  vertical-align: top;
+	  }
+	  table.full {
+	  border-style: outset;
+	  border-width: 1px;
+	  }
+	  table.headers {
+	  border-style: outset;
+	  border-width: 1px;
+	  }
+	  table.tt td {
+	  vertical-align: top;
+	  }
+	  table.full td {
+	  border-style: inset;
+	  border-width: 1px;
+	  }
+	  table.tt th {
+	  vertical-align: top;
+	  }
+	  table.full th {
+	  border-style: inset;
+	  border-width: 1px;
+	  }
+	  table.headers th {
+	  border-style: none none inset none;
+	  border-width: 1px;
+	  }
+	  table.left {
+	  margin-right: auto;
+	  }
+	  table.right {
+	  margin-left: auto;
+	  }
+	  table.center {
+	  margin-left: auto;
+	  margin-right: auto;
+	  }
+	  caption {
+	  caption-side: bottom;
+	  font-weight: bold;
+	  font-size: 9pt;
+	  margin-top: .5em;
+	  }
+	
+	  table.header {
+	  border-spacing: 1px;
+	  width: 95%;
+	  font-size: 10pt;
+	  color: white;
+	  }
+	  td.top {
+	  vertical-align: top;
+	  }
+	  td.topnowrap {
+	  vertical-align: top;
+	  white-space: nowrap; 
+	  }
+	  table.header td {
+	  background-color: gray;
+	  width: 50%;
+	  }
+	  table.header a {
+	  color: white;
+	  }
+	  td.reference {
+	  vertical-align: top;
+	  white-space: nowrap;
+	  padding-right: 1em;
+	  }
+	  thead {
+	  display:table-header-group;
+	  }
+	  ul.toc, ul.toc ul {
+	  list-style: none;
+	  margin-left: 1.5em;
+	  margin-right: 0em;
+	  padding-left: 0em;
+	  }
+	  ul.toc li {
+	  line-height: 150%;
+	  font-weight: bold;
+	  font-size: 10pt;
+	  margin-left: 0em;
+	  margin-right: 0em;
+	  }
+	  ul.toc li li {
+	  line-height: normal;
+	  font-weight: normal;
+	  font-size: 9pt;
+	  margin-left: 0em;
+	  margin-right: 0em;
+	  }
+	  li.excluded {
+	  font-size: 0pt;
+	  }
+	  ul p {
+	  margin-left: 0em;
+	  }
+	
+	  .comment {
+	  background-color: yellow;
+	  }
+	  .center {
+	  text-align: center;
+	  }
+	  .error {
+	  color: red;
+	  font-style: italic;
+	  font-weight: bold;
+	  }
+	  .figure {
+	  font-weight: bold;
+	  text-align: center;
+	  font-size: 9pt;
+	  }
+	  .filename {
+	  color: #333333;
+	  font-weight: bold;
+	  font-size: 12pt;
+	  line-height: 21pt;
+	  text-align: center;
+	  }
+	  .fn {
+	  font-weight: bold;
+	  }
+	  .hidden {
+	  display: none;
+	  }
+	  .left {
+	  text-align: left;
+	  }
+	  .right {
+	  text-align: right;
+	  }
+	  .title {
+	  color: #990000;
+	  font-size: 18pt;
+	  line-height: 18pt;
+	  font-weight: bold;
+	  text-align: center;
+	  margin-top: 36pt;
+	  }
+	  .vcardline {
+	  display: block;
+	  }
+	  .warning {
+	  font-size: 14pt;
+	  background-color: yellow;
+	  }
+	
+	
+	  @media print {
+	  .noprint {
+		display: none;
+	  }
+	
+	  a {
+		color: black;
+		text-decoration: none;
+	  }
+	
+	  table.header {
+		width: 90%;
+	  }
+	
+	  td.header {
+		width: 50%;
+		color: black;
+		background-color: white;
+		vertical-align: top;
+		font-size: 12pt;
+	  }
+	
+	  ul.toc a::after {
+		content: leader('.') target-counter(attr(href), page);
+	  }
+	
+	  ul.ind li li a {
+		content: target-counter(attr(href), page);
+	  }
+	
+	  .print2col {
+		column-count: 2;
+		-moz-column-count: 2;
+		column-fill: auto;
+	  }
+	  }
+	
+	  @page {
+	  @top-left {
+		   content: "Internet-Draft"; 
+	  } 
+	  @top-right {
+		   content: "December 2010"; 
+	  } 
+	  @top-center {
+		   content: "Abbreviated Title";
+	  } 
+	  @bottom-left {
+		   content: "Doe"; 
+	  } 
+	  @bottom-center {
+		   content: "Expires June 2011"; 
+	  } 
+	  @bottom-right {
+		   content: "[Page " counter(page) "]"; 
+	  } 
+	  }
+	
+	  @page:first { 
+		@top-left {
+		  content: normal;
+		}
+		@top-right {
+		  content: normal;
+		}
+		@top-center {
+		  content: normal;
+		}
+	  }
+  /*]]>*/
+  </style>
+
+  <link href="#rfc.toc" rel="Contents">
+<link href="#rfc.section.1" rel="Chapter" title="1 Introduction">
+<link href="#rfc.section.2" rel="Chapter" title="2 Requirements">
+<link href="#rfc.section.3" rel="Chapter" title="3 Existing Protocol Elements">
+<link href="#rfc.section.4" rel="Chapter" title="4 Recommendations">
+<link href="#rfc.section.5" rel="Chapter" title="5 Security Considerations">
+<link href="#rfc.section.6" rel="Chapter" title="6 Human Rights Considerations">
+<link href="#rfc.section.6.1" rel="Chapter" title="6.1 Connectivity">
+<link href="#rfc.section.6.2" rel="Chapter" title="6.2 Privacy">
+<link href="#rfc.section.6.3" rel="Chapter" title="6.3 Content Agnosticism">
+<link href="#rfc.section.6.4" rel="Chapter" title="6.4 Security">
+<link href="#rfc.section.6.5" rel="Chapter" title="6.5 Internationalization">
+<link href="#rfc.section.6.6" rel="Chapter" title="6.6 Censorship Resistance">
+<link href="#rfc.section.6.7" rel="Chapter" title="6.7 Open Standards">
+<link href="#rfc.section.6.8" rel="Chapter" title="6.8 Heterogeneity Support">
+<link href="#rfc.section.6.9" rel="Chapter" title="6.9 Anonymity">
+<link href="#rfc.section.6.10" rel="Chapter" title="6.10 Pseudonymity">
+<link href="#rfc.section.6.11" rel="Chapter" title="6.11 Accessibility">
+<link href="#rfc.section.6.12" rel="Chapter" title="6.12 Localization">
+<link href="#rfc.section.6.13" rel="Chapter" title="6.13 Decentralization">
+<link href="#rfc.section.6.14" rel="Chapter" title="6.14 Reliability">
+<link href="#rfc.section.6.15" rel="Chapter" title="6.15 Confidentiality">
+<link href="#rfc.section.6.16" rel="Chapter" title="6.16 Integrity">
+<link href="#rfc.section.6.17" rel="Chapter" title="6.17 Authenticity">
+<link href="#rfc.section.6.18" rel="Chapter" title="6.18 Adaptability">
+<link href="#rfc.section.6.19" rel="Chapter" title="6.19 Outcome Transparency">
+<link href="#rfc.section.7" rel="Chapter" title="7 IANA Considerations">
+<link href="#rfc.references" rel="Chapter" title="8 Normative References">
+<link href="#rfc.authors" rel="Chapter">
+
+
+  <meta name="generator" content="xml2rfc version 2.7.0 - http://tools.ietf.org/tools/xml2rfc" />
+  <link rel="schema.dct" href="http://purl.org/dc/terms/" />
+
+  <meta name="dct.creator" content="Sahib, S." />
+  <meta name="dct.identifier" content="urn:ietf:id:draft-451-new-protocol-elements-02" />
+  <meta name="dct.issued" scheme="ISO8601" content="2017-10-27" />
+  <meta name="dct.abstract" content="This draft recommends protocol updates to Hypertext Transfer Protocol (HTTP) status code 451 (defined by RFC7725) based on an examination of how the new status code is being used by parties involved in denial of Internet resources because of legal demands." />
+  <meta name="description" content="This draft recommends protocol updates to Hypertext Transfer Protocol (HTTP) status code 451 (defined by RFC7725) based on an examination of how the new status code is being used by parties involved in denial of Internet resources because of legal demands." />
+
+</head>
+
+<body>
+
+  <table class="header">
+    <tbody>
+    
+    	<tr>
+<td class="left">Network Working Group</td>
+<td class="right">S. Sahib</td>
+</tr>
+<tr>
+<td class="left">Internet-Draft</td>
+<td class="right">October 27, 2017</td>
+</tr>
+<tr>
+<td class="left">Intended status: Informational</td>
+<td class="right"></td>
+</tr>
+<tr>
+<td class="left">Expires: April 30, 2018</td>
+<td class="right"></td>
+</tr>
+
+    	
+    </tbody>
+  </table>
+
+  <p class="title">New protocol elements for HTTP Status Code 451<br />
+  <span class="filename">draft-451-new-protocol-elements-02</span></p>
+  
+  <h1 id="rfc.abstract"><a href="#rfc.abstract">Abstract</a></h1>
+<p>This draft recommends protocol updates to Hypertext Transfer Protocol (HTTP) status code 451 (defined by RFC7725) based on an examination of how the new status code is being used by parties involved in denial of Internet resources because of legal demands.</p>
+<p>Discussion of this draft is at <a href="https://www.irtf.org/mailman/listinfo/hrpc">https://www.irtf.org/mailman/listinfo/hrpc</a> and <a href="https://lists.ghserv.net/mailman/listinfo/statuscode451">https://lists.ghserv.net/mailman/listinfo/statuscode451</a>.</p>
+<h1 id="rfc.status"><a href="#rfc.status">Status of This Memo</a></h1>
+<p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
+<p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
+<p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
+<p>This Internet-Draft will expire on April 30, 2018.</p>
+<h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
+<p>Copyright (c) 2017 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
+<p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (http://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
+
+  
+  <hr class="noprint" />
+  <h1 class="np" id="rfc.toc"><a href="#rfc.toc">Table of Contents</a></h1>
+  <ul class="toc">
+
+  	<li>1.   <a href="#rfc.section.1">Introduction</a>
+</li>
+<li>2.   <a href="#rfc.section.2">Requirements</a>
+</li>
+<li>3.   <a href="#rfc.section.3">Existing Protocol Elements</a>
+</li>
+<li>4.   <a href="#rfc.section.4">Recommendations</a>
+</li>
+<li>5.   <a href="#rfc.section.5">Security Considerations</a>
+</li>
+<li>6.   <a href="#rfc.section.6">Human Rights Considerations</a>
+</li>
+<ul><li>6.1.   <a href="#rfc.section.6.1">Connectivity</a>
+</li>
+<li>6.2.   <a href="#rfc.section.6.2">Privacy</a>
+</li>
+<li>6.3.   <a href="#rfc.section.6.3">Content Agnosticism</a>
+</li>
+<li>6.4.   <a href="#rfc.section.6.4">Security</a>
+</li>
+<li>6.5.   <a href="#rfc.section.6.5">Internationalization</a>
+</li>
+<li>6.6.   <a href="#rfc.section.6.6">Censorship Resistance</a>
+</li>
+<li>6.7.   <a href="#rfc.section.6.7">Open Standards</a>
+</li>
+<li>6.8.   <a href="#rfc.section.6.8">Heterogeneity Support</a>
+</li>
+<li>6.9.   <a href="#rfc.section.6.9">Anonymity</a>
+</li>
+<li>6.10.   <a href="#rfc.section.6.10">Pseudonymity</a>
+</li>
+<li>6.11.   <a href="#rfc.section.6.11">Accessibility</a>
+</li>
+<li>6.12.   <a href="#rfc.section.6.12">Localization</a>
+</li>
+<li>6.13.   <a href="#rfc.section.6.13">Decentralization</a>
+</li>
+<li>6.14.   <a href="#rfc.section.6.14">Reliability</a>
+</li>
+<li>6.15.   <a href="#rfc.section.6.15">Confidentiality</a>
+</li>
+<li>6.16.   <a href="#rfc.section.6.16">Integrity</a>
+</li>
+<li>6.17.   <a href="#rfc.section.6.17">Authenticity</a>
+</li>
+<li>6.18.   <a href="#rfc.section.6.18">Adaptability</a>
+</li>
+<li>6.19.   <a href="#rfc.section.6.19">Outcome Transparency</a>
+</li>
+</ul><li>7.   <a href="#rfc.section.7">IANA Considerations</a>
+</li>
+<li>8.   <a href="#rfc.references">Normative References</a>
+</li>
+<li><a href="#rfc.authors">Author's Address</a>
+</li>
+
+
+  </ul>
+
+  <h1 id="rfc.section.1">
+<a href="#rfc.section.1">1.</a> <a href="#introduction" id="introduction">Introduction</a>
+</h1>
+<p><a href="#RFC7725" class="xref">[RFC7725]</a> was standardized by the IETF in February 2016. It defined HTTP status code 451 - to be used when a &#8220;a server operator has received a legal demand to deny access to a resource or to a set of resources that includes the requested resource&#8221;.</p>
+<p id="rfc.section.1.p.2">Subsequently, an effort was made to investigate usage of 451 status code and evaluate if it fulfills its mandate of providing &#8220;transparency in circumstances where issues of law or public policy affect server operations&#8221; <a href="#IMPL_REPORT_DRAFT" class="xref">[IMPL_REPORT_DRAFT]</a>. This draft attempts to explicate the protocol recommendations arising out of that investigation.</p>
+<h1 id="rfc.section.2">
+<a href="#rfc.section.2">2.</a> <a href="#requirements" id="requirements">Requirements</a>
+</h1>
+<p id="rfc.section.2.p.1">The key words &#8220;MUST&#8221;, &#8220;MUST NOT&#8221;, &#8220;REQUIRED&#8221;, &#8220;SHALL&#8221;, &#8220;SHALL NOT&#8221;, &#8220;SHOULD&#8221;, &#8220;SHOULD NOT&#8221;, &#8220;RECOMMENDED&#8221;, &#8220;MAY&#8221;, and &#8220;OPTIONAL&#8221; in this document are to be interpreted as described in <a href="#RFC2119" class="xref">[RFC2119]</a>.</p>
+<h1 id="rfc.section.3">
+<a href="#rfc.section.3">3.</a> <a href="#existing-protocol-elements" id="existing-protocol-elements">Existing Protocol Elements</a>
+</h1>
+<p id="rfc.section.3.p.1">The status code as standardized by the IETF specifies the following elements <a href="#RFC7725" class="xref">[RFC7725]</a> -</p>
+<p></p>
+
+<ul>
+<li>A server can return status code 451 to indicate that it is denying access to a resource or multiple resources on account of a legal demand.</li>
+<li>Responses using the status code SHOULD include an explanation in the response body of the details of the legal demand.</li>
+<li>Responses SHOULD include a &#8220;Link&#8221; HTTP header field <a href="#RFC8288" class="xref">[RFC8288]</a> whose value is a URI reference <a href="#RFC3986" class="xref">[RFC3986]</a> identifying itself.  The &#8220;Link&#8221; header field MUST have a &#8220;rel&#8221; parameter whose value is &#8220;blocked-by&#8221;. The intent is that the header be used to identify the entity actually implementing blockage, not any other entity mandating it.</li>
+</ul>
+<h1 id="rfc.section.4">
+<a href="#rfc.section.4">4.</a> <a href="#recommendations" id="recommendations">Recommendations</a>
+</h1>
+<p></p>
+
+<ul>
+<li>In addition to the &#8220;blocked-by&#8221; header, an HTTP response with status code 451 SHOULD include another &#8220;Link&#8221; HTTP header field which has a &#8220;rel&#8221; parameter whose value is &#8220;blocking-authority&#8221;. It&#8217;s important to distinguish between the implementer of the block, and the authority that mandated the block in the first place. This is because these two organizations might not be the same - a government (the blocking authority) could force an Internet Service Provider (the implementer of the block) to deny access to a certain resource. <a href="#IMPL_REPORT_DRAFT" class="xref">[IMPL_REPORT_DRAFT]</a> notes that  there is confusion amongst implementors of <a href="#RFC7725" class="xref">[RFC7725]</a> about the meaning of the term &#8220;blocked-by&#8221;, perhaps in part because of the example given <a href="#ERRATA_ID-5181" class="xref">[ERRATA_ID-5181]</a> - it would be useful to explicitly include space for both, as both provide essential information about the legal block.</li>
+<li>HTTP status code 451 is increasingly being used to deny access to resources based on geographical IP. The response SHOULD contain a provisional header with geographical scope of block. This scope SHOULD correspond to alpha-2 country code defined in <a href="#ISO.3166-1" class="xref">[ISO.3166-1]</a>. The rationale for keeping the geographical scope to country-level granularity is that most blocks are mandated by national governments <a href="#IMPL_REPORT_DRAFT" class="xref">[IMPL_REPORT_DRAFT]</a>. In addition, as the serving of this status code is voluntary, there is value in not complicating the specification.</li>
+</ul>
+<h1 id="rfc.section.5">
+<a href="#rfc.section.5">5.</a> <a href="#security-considerations" id="security-considerations">Security Considerations</a>
+</h1>
+<p id="rfc.section.5.p.1">This document does not add additional security considerations to <a href="#RFC7725" class="xref">[RFC7725]</a>.</p>
+<h1 id="rfc.section.6">
+<a href="#rfc.section.6">6.</a> <a href="#human-rights-considerations" id="human-rights-considerations">Human Rights Considerations</a>
+</h1>
+<p id="rfc.section.6.p.1">The use of HTTP 451 has implications for human rights, and is thus worth examining under the guidelines proposed by <a href="#RFC8280" class="xref">[RFC8280]</a> for developing human rights considerations for protocols.</p>
+<h1 id="rfc.section.6.1">
+<a href="#rfc.section.6.1">6.1.</a> <a href="#connectivity" id="connectivity">Connectivity</a>
+</h1>
+<p id="rfc.section.6.1.p.1">HTTP 451 status code response can be sent by the server hosting the blocked resource (end node) or an intermediary node that implements the block. If a resource is &#8220;blocked-by&#8221; a particular ISP then the ISP will be the one serving the status code.</p>
+<h1 id="rfc.section.6.2">
+<a href="#rfc.section.6.2">6.2.</a> <a href="#privacy" id="privacy">Privacy</a>
+</h1>
+<p id="rfc.section.6.2.p.1">As HTTP 451 is a response to an attempt to access a resource that in unavailable because of legal reasons, there are potential privacy (and anonymity) ramifications if there is leakage of who accessed what resource.</p>
+<p><a href="#RFC7725" class="xref">[RFC7725]</a> provides that a HTTP status code 451 is cacheable by default. Caching status code 451 on users&#8217; devices means that there will be a record of their attempt to access the blocked content stored on their devices. If caching is used, the software used to access the web resource should notify users that the HTTP 451 response has been received and cached.</p>
+<h1 id="rfc.section.6.3">
+<a href="#rfc.section.6.3">6.3.</a> <a href="#content-agnosticism" id="content-agnosticism">Content Agnosticism</a>
+</h1>
+<p id="rfc.section.6.3.p.1">There may be an issue of content agnosticism if the resource returning the HTTP 451 status code is only blocked for some users (e.g. geo-blocking). This is not a protocol issue, but rather an artefact of the blocking order.</p>
+<h1 id="rfc.section.6.4">
+<a href="#rfc.section.6.4">6.4.</a> <a href="#security" id="security">Security</a>
+</h1>
+<p id="rfc.section.6.4.p.1">Refer to section 5, Security Considerations, of <a href="#RFC7725" class="xref">[RFC7725]</a>.</p>
+<h1 id="rfc.section.6.5">
+<a href="#rfc.section.6.5">6.5.</a> <a href="#internationalization" id="internationalization">Internationalization</a>
+</h1>
+<p id="rfc.section.6.5.p.1">The RFC does not require the use of any particular language for user-facing strings such as the response body or the value of the header fields. The header field names, however, are in English. This is a common attribute of protocol elements within the IETF <a href="#RFC2277" class="xref">[RFC2277]</a>.</p>
+<h1 id="rfc.section.6.6">
+<a href="#rfc.section.6.6">6.6.</a> <a href="#censorship-resistance" id="censorship-resistance">Censorship Resistance</a>
+</h1>
+<p id="rfc.section.6.6.p.1">While HTTP 451 status code cannot prevent censorship, it can help make censorship more transparent and make assessment of Internet censorship cases easier by providing information about the block in a parseable manner.</p>
+<h1 id="rfc.section.6.7">
+<a href="#rfc.section.6.7">6.7.</a> <a href="#open-standards" id="open-standards">Open Standards</a>
+</h1>
+<p><a href="#RFC7725" class="xref">[RFC7725]</a> is an open standard.</p>
+<h1 id="rfc.section.6.8">
+<a href="#rfc.section.6.8">6.8.</a> <a href="#heterogeneity-support" id="heterogeneity-support">Heterogeneity Support</a>
+</h1>
+<p id="rfc.section.6.8.p.1">A HTTP 451 status code response can be used for any HTTP or HTTPS web resource and for any software that is capable of understanding HTTP header responses.</p>
+<h1 id="rfc.section.6.9">
+<a href="#rfc.section.6.9">6.9.</a> <a href="#anonymity" id="anonymity">Anonymity</a>
+</h1>
+<p id="rfc.section.6.9.p.1">HTTP 451 is an HTTP status code. If the connection between the client and the server is not over HTTPS, then there is potential for a network observer to identify what a particular user is accessing. Even with HTTPS, meta-data might be available that could be used to identify a user.</p>
+<h1 id="rfc.section.6.10">
+<a href="#rfc.section.6.10">6.10.</a> <a href="#pseudonymity" id="pseudonymity">Pseudonymity</a>
+</h1>
+<p id="rfc.section.6.10.p.1">HTTP 451 does not involve pseudonyms or nicknames.</p>
+<h1 id="rfc.section.6.11">
+<a href="#rfc.section.6.11">6.11.</a> <a href="#accessibility" id="accessibility">Accessibility</a>
+</h1>
+<p id="rfc.section.6.11.p.1">HTTP 451, being an HTTP status code, does not prescribe how the client should parse the information contained in the response fields. Based on the software that is used to access the resource, there could be accessibility concerns related to understanding this information.</p>
+<h1 id="rfc.section.6.12">
+<a href="#rfc.section.6.12">6.12.</a> <a href="#localization" id="localization">Localization</a>
+</h1>
+<p id="rfc.section.6.12.p.1">The values of the header fields and the response body can be localized by the blocker to suit the geographical scope of the block.</p>
+<h1 id="rfc.section.6.13">
+<a href="#rfc.section.6.13">6.13.</a> <a href="#decentralization" id="decentralization">Decentralization</a>
+</h1>
+<p id="rfc.section.6.13.p.1">HTTP 451 is used to provide information about a block mandated by a (centralized) blocking authority. The status code itself does not add any additional centralization.</p>
+<h1 id="rfc.section.6.14">
+<a href="#rfc.section.6.14">6.14.</a> <a href="#reliability" id="reliability">Reliability</a>
+</h1>
+<p id="rfc.section.6.14.p.1">HTTP 451 does not by itself prevent the misuse of the status code or wrong tagging of resources. The informational requirement as part of the protocol address this concern to some extent, but commonly it will be difficult for the end user to verify if the code has been correctly used.</p>
+<h1 id="rfc.section.6.15">
+<a href="#rfc.section.6.15">6.15.</a> <a href="#confidentiality" id="confidentiality">Confidentiality</a>
+</h1>
+<p id="rfc.section.6.15.p.1">HTTP 451 status code use implies sharing of information by the reporter that make it easier to identify where censorship is taking place. See section on Privacy and Anonymity.</p>
+<h1 id="rfc.section.6.16">
+<a href="#rfc.section.6.16">6.16.</a> <a href="#integrity" id="integrity">Integrity</a>
+</h1>
+<p id="rfc.section.6.16.p.1">HTTP 451 does not prescribe the use of any encryption to transport it, and is thus susceptible to leakage through man-in-the-middle attacks.</p>
+<h1 id="rfc.section.6.17">
+<a href="#rfc.section.6.17">6.17.</a> <a href="#authenticity" id="authenticity">Authenticity</a>
+</h1>
+<p id="rfc.section.6.17.p.1">Implementation of the status code 451 could guarantee authenticity in most cases if the server operators implement HTTPS and connection is over HTTPS.</p>
+<h1 id="rfc.section.6.18">
+<a href="#rfc.section.6.18">6.18.</a> <a href="#adaptability" id="adaptability">Adaptability</a>
+</h1>
+<p id="rfc.section.6.18.p.1">Status code 451 does not have any legal or technical limitations which prevents the development of other standards / protocols.</p>
+<h1 id="rfc.section.6.19">
+<a href="#rfc.section.6.19">6.19.</a> <a href="#outcome-transparency" id="outcome-transparency">Outcome Transparency</a>
+</h1>
+<p id="rfc.section.6.19.p.1">The assumption behind the development of the status code 451 is that transparency has a chilling effect on censorship and that transparency will enable the process of justice by allowing acts of censorship to be challenged. In some countries, blocks orders are unevenly implemented by ISPs either because it does not serve their bottom-lines or they are resisting censorship - governments in those countries could mandate the implementation of status code 451 which will make it easier for them to monitor the implementation of their block orders. Surveillance systems in some countries could be updated to watch out for the 451 error code on unencrypted traffic making it easier to identify those trying to access prohibited content. Before the implementation of this standard there would be no uniformity in which websites would implement a block order increasing the number of false positives for any automated monitoring systems.</p>
+<h1 id="rfc.section.7">
+<a href="#rfc.section.7">7.</a> <a href="#iana-considerations" id="iana-considerations">IANA Considerations</a>
+</h1>
+<p id="rfc.section.7.p.1">The Link Relation Type Registry should be updated with the following entry:</p>
+<p></p>
+
+<ul>
+<li>Relation Name: blocking-authority</li>
+<li>Description: Identifies the authority that has issued the block.</li>
+<li>Reference: this document</li>
+</ul>
+<p id="rfc.section.7.p.3">In addition, IANA should be updated with the following provisional header:</p>
+<p></p>
+
+<ul>
+<li>Header field name: geo-scope-block</li>
+<li>Applicable protocol: http</li>
+<li>Status: provisional</li>
+<li>Specification document(s): this document</li>
+</ul>
+<h1 id="rfc.references">
+<a href="#rfc.references">8.</a> Normative References</h1>
+<table><tbody>
+<tr>
+<td class="reference"><b id="ERRATA_ID-5181">[ERRATA_ID-5181]</b></td>
+<td class="top">
+<a>Bortzmeyer, S.</a>, "<a href="https://www.rfc-editor.org/errata/eid5181">[Technical Errata Reported] RFC7725 (5181)</a>", 2017.</td>
+</tr>
+<tr>
+<td class="reference"><b id="IMPL_REPORT_DRAFT">[IMPL_REPORT_DRAFT]</b></td>
+<td class="top">
+<a>Abraham, S.</a>, <a>Canales, MP.</a>, <a>Hall, J.</a>, <a>Khrustaleva, O.</a>, <a>ten Oever, N.</a>, <a>Runnegar, C.</a> and <a>S. Sahib</a>, "<a href="https://tools.ietf.org/html/draft-451-imp-report-00">Implementation Report for HTTP Status Code 451</a>", 2017.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ISO.3166-1">[ISO.3166-1]</b></td>
+<td class="top">
+<a>International Organization for Standardization</a>, "<a>Codes for the representation of names of countries and their subdivisions - Part 1: Country code</a>", ISO Standard 3166- 1:1997 , 1997.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC2119">[RFC2119]</b></td>
+<td class="top">
+<a>Bradner, S.</a>, "<a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>", BCP 14, RFC 2119, DOI 10.17487/RFC2119, March 1997.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC2277">[RFC2277]</b></td>
+<td class="top">
+<a>Alvestrand, H.</a>, "<a href="http://tools.ietf.org/html/rfc2277">IETF Policy on Character Sets and Languages</a>", BCP 18, RFC 2277, DOI 10.17487/RFC2277, January 1998.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC3986">[RFC3986]</b></td>
+<td class="top">
+<a>Berners-Lee, T.</a>, <a>Fielding, R.</a> and <a>L. Masinter</a>, "<a href="http://tools.ietf.org/html/rfc3986">Uniform Resource Identifier (URI): Generic Syntax</a>", STD 66, RFC 3986, DOI 10.17487/RFC3986, January 2005.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC7725">[RFC7725]</b></td>
+<td class="top">
+<a>Bray, T.</a>, "<a href="http://tools.ietf.org/html/rfc7725">An HTTP Status Code to Report Legal Obstacles</a>", RFC 7725, DOI 10.17487/RFC7725, February 2016.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC8280">[RFC8280]</b></td>
+<td class="top">
+<a>ten Oever, N.</a> and <a>C. Cath</a>, "<a href="http://tools.ietf.org/html/rfc8280">Research into Human Rights Protocol Considerations</a>", RFC 8280, DOI 10.17487/RFC8280, October 2017.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC8288">[RFC8288]</b></td>
+<td class="top">
+<a>Nottingham, M.</a>, "<a href="http://tools.ietf.org/html/rfc8288">Web Linking</a>", RFC 8288, DOI 10.17487/RFC8288, October 2017.</td>
+</tr>
+</tbody></table>
+<h1 id="rfc.authors"><a href="#rfc.authors">Author's Address</a></h1>
+<div class="avoidbreak">
+  <address class="vcard">
+	<span class="vcardline">
+	  <span class="fn">Shivan Kaul Sahib</span> 
+	  <span class="n hidden">
+		<span class="family-name">Sahib</span>
+	  </span>
+	</span>
+	<span class="org vcardline"></span>
+	<span class="adr">
+	  
+	  <span class="vcardline">
+		<span class="locality"></span> 
+		<span class="region"></span>
+		<span class="code"></span>
+	  </span>
+	  <span class="country-name vcardline"></span>
+	</span>
+	<span class="vcardline">EMail: <a href="mailto:shivankaulsahib@gmail.com">shivankaulsahib@gmail.com</a></span>
+
+  </address>
+</div>
+
+</body>
+</html>
