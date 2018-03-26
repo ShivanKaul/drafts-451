@@ -1,8 +1,8 @@
 ---
 title: New protocol elements for HTTP Status Code 451
 abbrev: New elements for HTTP 451
-docname: draft-451-new-protocol-elements-02
-date: 2017-10-27
+docname: draft-sahib-451-new-protocol-elements-00
+date: 2018-03-19
 category: info
 
 <!-- area: IRTF -->
@@ -80,7 +80,7 @@ informative:
 --- abstract
 
 This draft recommends protocol updates to Hypertext Transfer Protocol (HTTP) status
-code 451 (defined by RFC7725) based on an examination of how the new status code is being used by parties involved in denial of Internet resources because of legal demands.
+code 451 (defined by RFC7725) based on an examination of how the new status code is being used by parties involved in denial of Internet resources because of legal demands. Also included is an analysis of HTTP 451 from a human rights perspective using guidelines from RFC8280.
 
 Discussion of this draft is at <https://www.irtf.org/mailman/listinfo/hrpc> and <https://lists.ghserv.net/mailman/listinfo/statuscode451>.
 
@@ -117,6 +117,21 @@ The status code as standardized by the IETF specifies the following elements {{R
 # Security Considerations
 
 This document does not add additional security considerations to {{RFC7725}}.
+
+# IANA Considerations
+
+The Link Relation Type Registry should be updated with the following entry:
+
+- Relation Name: blocking-authority
+- Description: Identifies the authority that has issued the block.
+- Reference: this document
+
+In addition, IANA should be updated with the following provisional header:
+
+- Header field name: geo-scope-block
+- Applicable protocol: http
+- Status: provisional
+- Specification document(s): this document
 
 # Human Rights Considerations
 
@@ -218,20 +233,3 @@ HTTP 451 does not have any legal or technical limitations which prevents the dev
 ## Outcome Transparency
 
 The assumption behind the development of the status code 451 is that transparency has a chilling effect on censorship and that transparency will enable the process of justice by allowing acts of censorship to be challenged. In some countries, blocks orders are unevenly implemented by ISPs either because it does not serve their bottom-lines or they are resisting censorship - governments in those countries could mandate the implementation of status code 451 which will make it easier for them to monitor the implementation of their block orders. Surveillance systems in some countries could be updated to watch out for the 451 error code on unencrypted traffic making it easier to identify those trying to access prohibited content. Before the implementation of this standard there would be no uniformity in which websites would implement a block order increasing the number of false positives for any automated monitoring systems.
-
-
-
-# IANA Considerations
-
-The Link Relation Type Registry should be updated with the following entry:
-
-- Relation Name: blocking-authority
-- Description: Identifies the authority that has issued the block.
-- Reference: this document
-
-In addition, IANA should be updated with the following provisional header:
-
-- Header field name: geo-scope-block
-- Applicable protocol: http
-- Status: provisional
-- Specification document(s): this document

@@ -15,7 +15,7 @@
 <?rfc inline="yes"?>
 <?rfc text-list-symbols="-o*+"?>
 
-<rfc ipr="trust200902" docName="draft-451-new-protocol-elements-02" category="info">
+<rfc ipr="trust200902" docName="draft-sahib-451-new-protocol-elements-00" category="info">
 
   <front>
     <title abbrev="New elements for HTTP 451">New protocol elements for HTTP Status Code 451</title>
@@ -27,7 +27,7 @@
       </address>
     </author>
 
-    <date year="2017" month="October" day="27"/>
+    <date year="2018" month="March" day="19"/>
 
     
     <workgroup>Network Working Group</workgroup>
@@ -37,7 +37,7 @@
 
 
 <t>This draft recommends protocol updates to Hypertext Transfer Protocol (HTTP) status
-code 451 (defined by RFC7725) based on an examination of how the new status code is being used by parties involved in denial of Internet resources because of legal demands.</t>
+code 451 (defined by RFC7725) based on an examination of how the new status code is being used by parties involved in denial of Internet resources because of legal demands. Also included is an analysis of HTTP 451 from a human rights perspective using guidelines from RFC8280.</t>
 
 <t>Discussion of this draft is at <eref target="https://www.irtf.org/mailman/listinfo/hrpc">https://www.irtf.org/mailman/listinfo/hrpc</eref> and <eref target="https://lists.ghserv.net/mailman/listinfo/statuscode451">https://lists.ghserv.net/mailman/listinfo/statuscode451</eref>.</t>
 
@@ -85,6 +85,26 @@ code 451 (defined by RFC7725) based on an examination of how the new status code
 <section anchor="security-considerations" title="Security Considerations">
 
 <t>This document does not add additional security considerations to <xref target="RFC7725"/>.</t>
+
+</section>
+<section anchor="iana-considerations" title="IANA Considerations">
+
+<t>The Link Relation Type Registry should be updated with the following entry:</t>
+
+<t><list style="symbols">
+  <t>Relation Name: blocking-authority</t>
+  <t>Description: Identifies the authority that has issued the block.</t>
+  <t>Reference: this document</t>
+</list></t>
+
+<t>In addition, IANA should be updated with the following provisional header:</t>
+
+<t><list style="symbols">
+  <t>Header field name: geo-scope-block</t>
+  <t>Applicable protocol: http</t>
+  <t>Status: provisional</t>
+  <t>Specification document(s): this document</t>
+</list></t>
 
 </section>
 <section anchor="human-rights-considerations" title="Human Rights Considerations">
@@ -188,26 +208,6 @@ code 451 (defined by RFC7725) based on an examination of how the new status code
 <t>The assumption behind the development of the status code 451 is that transparency has a chilling effect on censorship and that transparency will enable the process of justice by allowing acts of censorship to be challenged. In some countries, blocks orders are unevenly implemented by ISPs either because it does not serve their bottom-lines or they are resisting censorship - governments in those countries could mandate the implementation of status code 451 which will make it easier for them to monitor the implementation of their block orders. Surveillance systems in some countries could be updated to watch out for the 451 error code on unencrypted traffic making it easier to identify those trying to access prohibited content. Before the implementation of this standard there would be no uniformity in which websites would implement a block order increasing the number of false positives for any automated monitoring systems.</t>
 
 </section>
-</section>
-<section anchor="iana-considerations" title="IANA Considerations">
-
-<t>The Link Relation Type Registry should be updated with the following entry:</t>
-
-<t><list style="symbols">
-  <t>Relation Name: blocking-authority</t>
-  <t>Description: Identifies the authority that has issued the block.</t>
-  <t>Reference: this document</t>
-</list></t>
-
-<t>In addition, IANA should be updated with the following provisional header:</t>
-
-<t><list style="symbols">
-  <t>Header field name: geo-scope-block</t>
-  <t>Applicable protocol: http</t>
-  <t>Status: provisional</t>
-  <t>Specification document(s): this document</t>
-</list></t>
-
 </section>
 
 
@@ -363,99 +363,100 @@ code 451 (defined by RFC7725) based on an examination of how the new status code
   </back>
 
 <!-- ##markdown-source:
-H4sIAGiqr1oAA5VabW/bSJL+zl/Rp/mwzp6o2N6bSSIsBueNPRffJLFP9mBx
-OBwGLbIl9poied1Na7SD+e/7VPULSVke7AGBI5HN7np96qmi8jzPnHa1Woqv
-ai8607q2aGuharVTjbNi0xrx6fHxXjw46XorPralEv/27UUm12ujnv1jL1fT
-irItGrnDzqWRG5fjUt6ofR7PyONT+fllVkqHhZfnF+/yi/P88l1W4MK2NYel
-0M2mzbI//0ueC2mUXIrb1eMPIs+/z3RnlsKZ3rrL8/MP2GXfmqetafuOxHL0
-TfwVf3SzFf9Bl7MndcDVEns0TplGufyaZMsy62RT/izrtoEYB2WzTi9FJoTZ
-FKq07lCHy0JA9tFH3ZRQIV6wrXFGbWz6fthNvjqji7S4aHesfvyum1o3wzHq
-F5fX2rocm6zbGsvy9o//mmWyd1VrllmORYKewp2HxY8L8SArvfYXvdkfKv0s
-G/Gj7OvxTbWTul4Ky3efcNPSvX/f0uUFhMqypjU76fSzWmZ45Ga1unq8+vn2
-Ov/24v3FkjcJITP7n0dVVI0uZC1ujJFOipXqYARV/q9Y/fDx3bvLb8UZPfZm
-xs8NbuavUReWS+RRGfEXbPH3nToo40+TZqtgt8q5zi7fvt3v9ws4Jleldq1Z
-tGb7VvHpb5Uu6TQS+/bhbvGni+++y49EpgD2geoqJYzqjLJwA/RtG9Fu2HaW
-PhRt38Bh+ILQoMXaCNuvS/2sLdZayHsvjRMXSyQFLT3gkVKNFb348OG0ohA5
-xiAfDPvdma1s9N+9HCTeA4WkNGW4xs9aRQJRRsS9oGZaKVhfCMTnYgFccHlx
-8WEZPr+/fH8eP19evnsXP5Ob+PPtl/vPP69u7u9Wjz9fr65+eJya7nbX+ZT1
-QnpXv4oQ/y+PX62NrORuev3L/UJ8lDAOZ8Toxn8uxCdZ19OLdwvxY0VggPXP
-cnrv6wIJ1Yg79RxCKt35uBCrvmnUVppjoSY5dRyDrkVOLrRyG46/yu3qtwPO
-6V2XGzZPfn6eBTP/6cP777zmgz/exwvk03HW4VJOiLcGaMgCCPVYaeuRFEHr
-saO0A2D3HVnaApPEp0OnDOGHeDSysRtlxH1cdkaeegMkIldlRXCVOCvVBuBT
-ivUhBsQbsZYWV+BogIj6Re50k5KkavecPsDzsBfHvoCIa0Vw21u/WYcMoRTS
-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
-nZHKXjy0lJ37ndTz02kYwTduFLzpJw61hmlD9+WHryE9bRjKc6Me+ZGf3kZi
-YsXboT2P3KZ3BSXT4+j9lkdZMK1+1wU9wAzLUwcco0Awiu9fxq/M/IgYfVJd
-8+sT/y6MqtIQZR67j5/kdFZNqNMMDlx7cPrfemozuF+U8cUM2gf/04lhX//6
-qKiwRjVbSujbxkNI+n3FPM6juNPwY6m+IcOOZ/YepdHrg19qNm3ssvVo3sMR
-E9rEdetcu8v9JMWj0IE3N8yfSeCRoPlk6sVVmkbow69AfG2Nbygnk+L0XvzY
-HT5K2IpHKR9gcUcGAnrSD1le2TMowwXLWwgQ0ENN7Eo9gLAHiy6aZZ4adsSq
-ujLW/b10EImqYERmElQZg2++mDRkfQ8B9AjQFlA+QtQToOVt5Qy/BhooCsKl
-AgdxQy+/EH9Rm9a8Zr84NvQ/ZwnTg6hEQ6RFE7LyQLOJ1lVrq2m47hemTVOV
-9z32MD/2v1zod2s/4N/I2tL0BZugythE71H32x1bLfiH20lva0pgeut/9fXq
-5GyQXtlQkfeKPR7AY1Zqi6Azh8gTR15hqnz0ipPGuMuM3+WFXb7yj7pevsjB
-mmsGcsaLpbj1TomvTY9ezPCUkvr/0asZ/8owvN1bTt8BZ9lk0ssa/1MavJyh
-szqfjtvoJZG+nLleztLQa9yOx6iEOhEz/S9vcM//ymg53p+ujifFSfgz++ZY
-nX8A3kozLPEoAAA=
+H4sIAEGur1oAA5VabW/jSHL+rl/R0X44TyJqbG92Z8Y4LOIbezPKzowd24tD
+EASLFtkS+0yymW7SWt1i/3ueqn4hKcmLCzDwSGSzu16feqqoLMtmne4qdSW+
+qp1orelMbiqhKlWrpnNiY6z49PR0Lx472fVOfDSFEv/63cVMrtdWvfjHjlfT
+isLkjayxc2HlpsucLPU6w42sUbssnpTFZ7Pz81khOyy/PL94n51/m118mOW4
+sDV2fyV0szGz2Z//KcuEtEpeidXD048iy36Y6dZeic72rrs8P/9wfjnbGfu8
+taZvSbiOvom/4o9utuLf6fLsWe1xtcAeTadso7rshiSczVwnm+IXWZkGYuyV
+m7X6SsyEsJtcFa7bV+GyEJB99FE3BVSIF5yxnVUbl77v68nXzuo8Lc5NzerH
+77qpdDMco37tsko7WG9fr02FZZn553+ZzWTflcZezTIsEvQU7jwuf1qKR7Ky
+v+iN/1jqF9mIn2RfjW+qWurqSji++4yb7J5/29LlJYSazRpja9npF3U1wyO3
+Dw/XT9e/rG6y7y7eX1zxJiFw5v/9pPKy0bmsxK21spPiQbUwgir+Rzz8+PHd
+u8vvxBk99mbOzyU3v+OvUReWS2RRGfEXbPH3Wu2V9adJu1WwW9l1rbt6+3a3
+2y3hmEwVujN2aez2reLT3ypd0Gkk9urxbvntxfffZwciUxj7cO1KJaxqrXJw
+A/Q1jTAbtp2jD7npGzgMXxAatFhb4fp1oV+0w1oHee+l7cTFFVKDlu7xSKHG
+il58+HBaUYgcY5APhv3u7FY2+u9eDhLvkUJS2iJc42edIoEoI+JeUDOtFKwv
+BOJzsQAuuLy4+HAVPr+/fH8eP19evnsXP5Ob+PPqy/3nXx5u7+8enn65ebj+
+8WlqulXd+pT1QnpXv4oT/y+PX6+tLGU9vf7lfik+ShiHM2J04z+W4pOsqunF
+u6X4qSQwwPoXOb33dYmEasSdegkhle58XIqHvmnUVtpDoSY5dRiDnUFOLrXq
+Nhx/ZVdXbz3aEc7pus0sm4fALZj52w/vv/eaD/54Hy+QT8dZh0sZId4aoCFz
+INRTqZ3HUwStx47CDbDdt2RpB0wSn/atsoQf4snKxm2UFfdx2Rl56g2QiFw1
+y4OrxFmhNgCfQqz3MSDeiLV0uAJHA0TUr7LWTUqS0uw4fYDnYS+OfQER14rg
+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
+9n/z7DNSXSkAAA==
 
 -->
 

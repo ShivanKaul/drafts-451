@@ -3,20 +3,22 @@
 
 
 Network Working Group                                           S. Sahib
-Internet-Draft                                          October 27, 2017
+Internet-Draft                                            March 19, 2018
 Intended status: Informational
-Expires: April 30, 2018
+Expires: September 20, 2018
 
 
              New protocol elements for HTTP Status Code 451
-                   draft-451-new-protocol-elements-02
+                draft-sahib-451-new-protocol-elements-00
 
 Abstract
 
    This draft recommends protocol updates to Hypertext Transfer Protocol
    (HTTP) status code 451 (defined by RFC7725) based on an examination
    of how the new status code is being used by parties involved in
-   denial of Internet resources because of legal demands.
+   denial of Internet resources because of legal demands.  Also included
+   is an analysis of HTTP 451 from a human rights perspective using
+   guidelines from RFC8280.
 
    Discussion of this draft is at https://www.irtf.org/mailman/listinfo/
    hrpc and https://lists.ghserv.net/mailman/listinfo/statuscode451.
@@ -36,11 +38,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on April 30, 2018.
+   This Internet-Draft will expire on September 20, 2018.
 
 Copyright Notice
 
-   Copyright (c) 2017 IETF Trust and the persons identified as the
+   Copyright (c) 2018 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -48,16 +50,16 @@ Copyright Notice
    (http://trustee.ietf.org/license-info) in effect on the date of
    publication of this document.  Please review these documents
    carefully, as they describe your rights and restrictions with respect
+
+
+
+Sahib                  Expires September 20, 2018               [Page 1]
+
+Internet-Draft          New elements for HTTP 451             March 2018
+
+
    to this document.  Code Components extracted from this document must
    include Simplified BSD License text as described in Section 4.e of
-
-
-
-Sahib                    Expires April 30, 2018                 [Page 1]
-
-Internet-Draft          New elements for HTTP 451           October 2017
-
-
    the Trust Legal Provisions and are provided without warranty as
    described in the Simplified BSD License.
 
@@ -68,27 +70,27 @@ Table of Contents
    3.  Existing Protocol Elements  . . . . . . . . . . . . . . . . .   3
    4.  Recommendations . . . . . . . . . . . . . . . . . . . . . . .   3
    5.  Security Considerations . . . . . . . . . . . . . . . . . . .   4
-   6.  Human Rights Considerations . . . . . . . . . . . . . . . . .   4
-     6.1.  Connectivity  . . . . . . . . . . . . . . . . . . . . . .   4
-     6.2.  Privacy . . . . . . . . . . . . . . . . . . . . . . . . .   4
-     6.3.  Content Agnosticism . . . . . . . . . . . . . . . . . . .   4
-     6.4.  Security  . . . . . . . . . . . . . . . . . . . . . . . .   4
-     6.5.  Internationalization  . . . . . . . . . . . . . . . . . .   5
-     6.6.  Censorship Resistance . . . . . . . . . . . . . . . . . .   5
-     6.7.  Open Standards  . . . . . . . . . . . . . . . . . . . . .   5
-     6.8.  Heterogeneity Support . . . . . . . . . . . . . . . . . .   5
-     6.9.  Anonymity . . . . . . . . . . . . . . . . . . . . . . . .   5
-     6.10. Pseudonymity  . . . . . . . . . . . . . . . . . . . . . .   5
-     6.11. Accessibility . . . . . . . . . . . . . . . . . . . . . .   5
-     6.12. Localization  . . . . . . . . . . . . . . . . . . . . . .   6
-     6.13. Decentralization  . . . . . . . . . . . . . . . . . . . .   6
-     6.14. Reliability . . . . . . . . . . . . . . . . . . . . . . .   6
-     6.15. Confidentiality . . . . . . . . . . . . . . . . . . . . .   6
-     6.16. Integrity . . . . . . . . . . . . . . . . . . . . . . . .   6
-     6.17. Authenticity  . . . . . . . . . . . . . . . . . . . . . .   6
-     6.18. Adaptability  . . . . . . . . . . . . . . . . . . . . . .   6
-     6.19. Outcome Transparency  . . . . . . . . . . . . . . . . . .   6
-   7.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   7
+   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   4
+   7.  Human Rights Considerations . . . . . . . . . . . . . . . . .   4
+     7.1.  Connectivity  . . . . . . . . . . . . . . . . . . . . . .   4
+     7.2.  Privacy . . . . . . . . . . . . . . . . . . . . . . . . .   5
+     7.3.  Content Agnosticism . . . . . . . . . . . . . . . . . . .   5
+     7.4.  Security  . . . . . . . . . . . . . . . . . . . . . . . .   5
+     7.5.  Internationalization  . . . . . . . . . . . . . . . . . .   5
+     7.6.  Censorship Resistance . . . . . . . . . . . . . . . . . .   5
+     7.7.  Open Standards  . . . . . . . . . . . . . . . . . . . . .   5
+     7.8.  Heterogeneity Support . . . . . . . . . . . . . . . . . .   5
+     7.9.  Anonymity . . . . . . . . . . . . . . . . . . . . . . . .   6
+     7.10. Pseudonymity  . . . . . . . . . . . . . . . . . . . . . .   6
+     7.11. Accessibility . . . . . . . . . . . . . . . . . . . . . .   6
+     7.12. Localization  . . . . . . . . . . . . . . . . . . . . . .   6
+     7.13. Decentralization  . . . . . . . . . . . . . . . . . . . .   6
+     7.14. Reliability . . . . . . . . . . . . . . . . . . . . . . .   6
+     7.15. Confidentiality . . . . . . . . . . . . . . . . . . . . .   6
+     7.16. Integrity . . . . . . . . . . . . . . . . . . . . . . . .   7
+     7.17. Authenticity  . . . . . . . . . . . . . . . . . . . . . .   7
+     7.18. Adaptability  . . . . . . . . . . . . . . . . . . . . . .   7
+     7.19. Outcome Transparency  . . . . . . . . . . . . . . . . . .   7
    8.  Normative References  . . . . . . . . . . . . . . . . . . . .   7
    Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   8
 
@@ -107,11 +109,9 @@ Table of Contents
 
 
 
-
-
-Sahib                    Expires April 30, 2018                 [Page 2]
+Sahib                  Expires September 20, 2018               [Page 2]
 
-Internet-Draft          New elements for HTTP 451           October 2017
+Internet-Draft          New elements for HTTP 451             March 2018
 
 
 2.  Requirements
@@ -165,9 +165,9 @@ Internet-Draft          New elements for HTTP 451           October 2017
 
 
 
-Sahib                    Expires April 30, 2018                 [Page 3]
+Sahib                  Expires September 20, 2018               [Page 3]
 
-Internet-Draft          New elements for HTTP 451           October 2017
+Internet-Draft          New elements for HTTP 451             March 2018
 
 
       governments [IMPL_REPORT_DRAFT].  In addition, as the serving of
@@ -179,178 +179,7 @@ Internet-Draft          New elements for HTTP 451           October 2017
    This document does not add additional security considerations to
    [RFC7725].
 
-6.  Human Rights Considerations
-
-   The use of HTTP 451 has implications for human rights, and is thus
-   worth examining under the guidelines for developing human rights
-   considerations for protocols [RFC8280].
-
-6.1.  Connectivity
-
-   HTTP 451 status code response can be sent by the server hosting the
-   blocked resource (end node) or an intermediary node that implements
-   the block.  If a resource is "blocked-by" a particular ISP then the
-   ISP will be the one serving the status code.
-
-6.2.  Privacy
-
-   HTTP 451 is used as a response when the client requests a resource
-   that's unavailable because of legal reasons.  Consequentially, there
-   are potential privacy (and anonymity) ramifications if there is
-   leakage of who accessed what resource.
-
-   HTTP status code 451 is cacheable by default [RFC7725].  Caching
-   status code 451 on users' devices means that there will be a record
-   of their attempt to access the blocked content stored on their
-   devices.  If caching is used, the software used to access the web
-   resource should notify users that the HTTP 451 response has been
-   received and cached.
-
-6.3.  Content Agnosticism
-
-   The scope of the blocking order may be geographical in nature.  This
-   results in an issue related to content agnosticism.  This is not a
-   protocol issue, but rather an artefact of the blocking order.
-
-6.4.  Security
-
-   Refer to section 5, Security Considerations, of [RFC7725].
-
-
-
-
-
-
-Sahib                    Expires April 30, 2018                 [Page 4]
-
-Internet-Draft          New elements for HTTP 451           October 2017
-
-
-6.5.  Internationalization
-
-   [RFC7725] does not require the use of any particular language for
-   user-facing strings such as the response body or the value of the
-   header fields.  The header field names, however, are in English.
-   This is a common attribute of protocol elements within the IETF
-   [RFC2277].
-
-6.6.  Censorship Resistance
-
-   While HTTP 451 status code cannot prevent censorship, it can help
-   make censorship more transparent and make assessment of Internet
-   censorship cases easier by providing information about the block in a
-   parseable manner.
-
-6.7.  Open Standards
-
-   [RFC7725] is an open standard.
-
-6.8.  Heterogeneity Support
-
-   An HTTP 451 status code response can be used for any web resource and
-   for any software that is capable of understanding HTTP header
-   responses.
-
-6.9.  Anonymity
-
-   HTTP 451 is an HTTP status code.  If the connection between the
-   client and the server is not over HTTPS, then there is potential for
-   a network observer to identify what a particular user is accessing.
-   Even with HTTPS, meta-data might be available that could be used to
-   identify a user.
-
-6.10.  Pseudonymity
-
-   HTTP 451 does not involve pseudonyms or nicknames.
-
-6.11.  Accessibility
-
-   HTTP 451, being an HTTP status code, does not prescribe how the
-   client should parse the information contained in the response fields.
-   Depending on the software that is used to access the resource, there
-   could be accessibility concerns related to understanding this
-   information.
-
-
-
-
-
-
-
-Sahib                    Expires April 30, 2018                 [Page 5]
-
-Internet-Draft          New elements for HTTP 451           October 2017
-
-
-6.12.  Localization
-
-   The values of the header fields and the response body can be
-   localized by the blocker to suit the geographical scope of the block.
-
-6.13.  Decentralization
-
-   HTTP 451 is used to provide information about a block mandated by a
-   (centralized) blocking authority.  The status code itself does not
-   add any additional centralization.
-
-6.14.  Reliability
-
-   HTTP 451 does not by itself prevent the misuse of the status code or
-   wrong tagging of resources.  The informational requirement as part of
-   the protocol address this concern to some extent, but commonly it
-   will be difficult for the end user to verify if the code has been
-   correctly used.  Objective of this draft is to increase reliability
-   by making it clearer what a good HTTP 451 response looks like.
-
-6.15.  Confidentiality
-
-   HTTP 451 status code use implies sharing of information by the
-   reporter that make it easier to identify where censorship is taking
-   place.  See section on Privacy and Anonymity.
-
-6.16.  Integrity
-
-   HTTP 451 does not prescribe the use of any encryption to transport
-   it, and is thus susceptible to leakage through man-in-the-middle
-   attacks.
-
-6.17.  Authenticity
-
-   Authenticity of the server implementing HTTP 451 is dependent on the
-   connection being over HTTPS.
-
-6.18.  Adaptability
-
-   HTTP 451 does not have any legal or technical limitations which
-   prevents the development of other standards / protocols.
-
-6.19.  Outcome Transparency
-
-   The assumption behind the development of the status code 451 is that
-   transparency has a chilling effect on censorship and that
-   transparency will enable the process of justice by allowing acts of
-   censorship to be challenged.  In some countries, blocks orders are
-
-
-
-Sahib                    Expires April 30, 2018                 [Page 6]
-
-Internet-Draft          New elements for HTTP 451           October 2017
-
-
-   unevenly implemented by ISPs either because it does not serve their
-   bottom-lines or they are resisting censorship - governments in those
-   countries could mandate the implementation of status code 451 which
-   will make it easier for them to monitor the implementation of their
-   block orders.  Surveillance systems in some countries could be
-   updated to watch out for the 451 error code on unencrypted traffic
-   making it easier to identify those trying to access prohibited
-   content.  Before the implementation of this standard there would be
-   no uniformity in which websites would implement a block order
-   increasing the number of false positives for any automated monitoring
-   systems.
-
-7.  IANA Considerations
+6.  IANA Considerations
 
    The Link Relation Type Registry should be updated with the following
    entry:
@@ -372,6 +201,177 @@ Internet-Draft          New elements for HTTP 451           October 2017
 
    -  Specification document(s): this document
 
+7.  Human Rights Considerations
+
+   The use of HTTP 451 has implications for human rights, and is thus
+   worth examining under the guidelines for developing human rights
+   considerations for protocols [RFC8280].
+
+7.1.  Connectivity
+
+   HTTP 451 status code response can be sent by the server hosting the
+   blocked resource (end node) or an intermediary node that implements
+   the block.  If a resource is "blocked-by" a particular ISP then the
+   ISP will be the one serving the status code.
+
+
+
+
+
+
+
+
+Sahib                  Expires September 20, 2018               [Page 4]
+
+Internet-Draft          New elements for HTTP 451             March 2018
+
+
+7.2.  Privacy
+
+   HTTP 451 is used as a response when the client requests a resource
+   that's unavailable because of legal reasons.  Consequentially, there
+   are potential privacy (and anonymity) ramifications if there is
+   leakage of who accessed what resource.
+
+   HTTP status code 451 is cacheable by default [RFC7725].  Caching
+   status code 451 on users' devices means that there will be a record
+   of their attempt to access the blocked content stored on their
+   devices.  If caching is used, the software used to access the web
+   resource should notify users that the HTTP 451 response has been
+   received and cached.
+
+7.3.  Content Agnosticism
+
+   The scope of the blocking order may be geographical in nature.  This
+   results in an issue related to content agnosticism.  This is not a
+   protocol issue, but rather an artefact of the blocking order.
+
+7.4.  Security
+
+   Refer to section 5, Security Considerations, of [RFC7725].
+
+7.5.  Internationalization
+
+   [RFC7725] does not require the use of any particular language for
+   user-facing strings such as the response body or the value of the
+   header fields.  The header field names, however, are in English.
+   This is a common attribute of protocol elements within the IETF
+   [RFC2277].
+
+7.6.  Censorship Resistance
+
+   While HTTP 451 status code cannot prevent censorship, it can help
+   make censorship more transparent and make assessment of Internet
+   censorship cases easier by providing information about the block in a
+   parseable manner.
+
+7.7.  Open Standards
+
+   [RFC7725] is an open standard.
+
+7.8.  Heterogeneity Support
+
+   An HTTP 451 status code response can be used for any web resource and
+   for any software that is capable of understanding HTTP header
+   responses.
+
+
+
+Sahib                  Expires September 20, 2018               [Page 5]
+
+Internet-Draft          New elements for HTTP 451             March 2018
+
+
+7.9.  Anonymity
+
+   HTTP 451 is an HTTP status code.  If the connection between the
+   client and the server is not over HTTPS, then there is potential for
+   a network observer to identify what a particular user is accessing.
+   Even with HTTPS, meta-data might be available that could be used to
+   identify a user.
+
+7.10.  Pseudonymity
+
+   HTTP 451 does not involve pseudonyms or nicknames.
+
+7.11.  Accessibility
+
+   HTTP 451, being an HTTP status code, does not prescribe how the
+   client should parse the information contained in the response fields.
+   Depending on the software that is used to access the resource, there
+   could be accessibility concerns related to understanding this
+   information.
+
+7.12.  Localization
+
+   The values of the header fields and the response body can be
+   localized by the blocker to suit the geographical scope of the block.
+
+7.13.  Decentralization
+
+   HTTP 451 is used to provide information about a block mandated by a
+   (centralized) blocking authority.  The status code itself does not
+   add any additional centralization.
+
+7.14.  Reliability
+
+   HTTP 451 does not by itself prevent the misuse of the status code or
+   wrong tagging of resources.  The informational requirement as part of
+   the protocol address this concern to some extent, but commonly it
+   will be difficult for the end user to verify if the code has been
+   correctly used.  Objective of this draft is to increase reliability
+   by making it clearer what a good HTTP 451 response looks like.
+
+7.15.  Confidentiality
+
+   HTTP 451 status code use implies sharing of information by the
+   reporter that make it easier to identify where censorship is taking
+   place.  See section on Privacy and Anonymity.
+
+
+
+
+
+
+Sahib                  Expires September 20, 2018               [Page 6]
+
+Internet-Draft          New elements for HTTP 451             March 2018
+
+
+7.16.  Integrity
+
+   HTTP 451 does not prescribe the use of any encryption to transport
+   it, and is thus susceptible to leakage through man-in-the-middle
+   attacks.
+
+7.17.  Authenticity
+
+   Authenticity of the server implementing HTTP 451 is dependent on the
+   connection being over HTTPS.
+
+7.18.  Adaptability
+
+   HTTP 451 does not have any legal or technical limitations which
+   prevents the development of other standards / protocols.
+
+7.19.  Outcome Transparency
+
+   The assumption behind the development of the status code 451 is that
+   transparency has a chilling effect on censorship and that
+   transparency will enable the process of justice by allowing acts of
+   censorship to be challenged.  In some countries, blocks orders are
+   unevenly implemented by ISPs either because it does not serve their
+   bottom-lines or they are resisting censorship - governments in those
+   countries could mandate the implementation of status code 451 which
+   will make it easier for them to monitor the implementation of their
+   block orders.  Surveillance systems in some countries could be
+   updated to watch out for the 451 error code on unencrypted traffic
+   making it easier to identify those trying to access prohibited
+   content.  Before the implementation of this standard there would be
+   no uniformity in which websites would implement a block order
+   increasing the number of false positives for any automated monitoring
+   systems.
+
 8.  Normative References
 
    [ERRATA_ID-5181]
@@ -389,9 +389,9 @@ Internet-Draft          New elements for HTTP 451           October 2017
 
 
 
-Sahib                    Expires April 30, 2018                 [Page 7]
+Sahib                  Expires September 20, 2018               [Page 7]
 
-Internet-Draft          New elements for HTTP 451           October 2017
+Internet-Draft          New elements for HTTP 451             March 2018
 
 
    [ISO.3166-1]
@@ -445,4 +445,4 @@ Author's Address
 
 
 
-Sahib                    Expires April 30, 2018                 [Page 8]
+Sahib                  Expires September 20, 2018               [Page 8]
