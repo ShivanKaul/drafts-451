@@ -3,13 +3,13 @@
 
 
 Network Working Group                                           S. Sahib
-Internet-Draft                                            March 19, 2018
+Internet-Draft                                             June 29, 2018
 Intended status: Informational
-Expires: September 20, 2018
+Expires: December 31, 2018
 
 
              New protocol elements for HTTP Status Code 451
-                draft-sahib-451-new-protocol-elements-00
+                draft-sahib-451-new-protocol-elements-01
 
 Abstract
 
@@ -21,7 +21,8 @@ Abstract
    guidelines from RFC8280.
 
    Discussion of this draft is at https://www.irtf.org/mailman/listinfo/
-   hrpc and https://lists.ghserv.net/mailman/listinfo/statuscode451.
+   hrpc [1] and https://lists.ghserv.net/mailman/listinfo/statuscode451
+   [2].
 
 Status of This Memo
 
@@ -31,14 +32,14 @@ Status of This Memo
    Internet-Drafts are working documents of the Internet Engineering
    Task Force (IETF).  Note that other groups may also distribute
    working documents as Internet-Drafts.  The list of current Internet-
-   Drafts is at http://datatracker.ietf.org/drafts/current/.
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
 
    Internet-Drafts are draft documents valid for a maximum of six months
    and may be updated, replaced, or obsoleted by other documents at any
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on September 20, 2018.
+   This Internet-Draft will expire on December 31, 2018.
 
 Copyright Notice
 
@@ -47,17 +48,17 @@ Copyright Notice
 
    This document is subject to BCP 78 and the IETF Trust's Legal
    Provisions Relating to IETF Documents
-   (http://trustee.ietf.org/license-info) in effect on the date of
+   (https://trustee.ietf.org/license-info) in effect on the date of
    publication of this document.  Please review these documents
-   carefully, as they describe your rights and restrictions with respect
 
 
 
-Sahib                  Expires September 20, 2018               [Page 1]
+Sahib                   Expires December 31, 2018               [Page 1]
 
-Internet-Draft          New elements for HTTP 451             March 2018
+Internet-Draft          New elements for HTTP 451              June 2018
 
 
+   carefully, as they describe your rights and restrictions with respect
    to this document.  Code Components extracted from this document must
    include Simplified BSD License text as described in Section 4.e of
    the Trust Legal Provisions and are provided without warranty as
@@ -79,20 +80,23 @@ Table of Contents
      7.5.  Internationalization  . . . . . . . . . . . . . . . . . .   5
      7.6.  Censorship Resistance . . . . . . . . . . . . . . . . . .   5
      7.7.  Open Standards  . . . . . . . . . . . . . . . . . . . . .   5
-     7.8.  Heterogeneity Support . . . . . . . . . . . . . . . . . .   5
+     7.8.  Heterogeneity Support . . . . . . . . . . . . . . . . . .   6
      7.9.  Anonymity . . . . . . . . . . . . . . . . . . . . . . . .   6
      7.10. Pseudonymity  . . . . . . . . . . . . . . . . . . . . . .   6
      7.11. Accessibility . . . . . . . . . . . . . . . . . . . . . .   6
      7.12. Localization  . . . . . . . . . . . . . . . . . . . . . .   6
      7.13. Decentralization  . . . . . . . . . . . . . . . . . . . .   6
      7.14. Reliability . . . . . . . . . . . . . . . . . . . . . . .   6
-     7.15. Confidentiality . . . . . . . . . . . . . . . . . . . . .   6
+     7.15. Confidentiality . . . . . . . . . . . . . . . . . . . . .   7
      7.16. Integrity . . . . . . . . . . . . . . . . . . . . . . . .   7
      7.17. Authenticity  . . . . . . . . . . . . . . . . . . . . . .   7
      7.18. Adaptability  . . . . . . . . . . . . . . . . . . . . . .   7
      7.19. Outcome Transparency  . . . . . . . . . . . . . . . . . .   7
-   8.  Normative References  . . . . . . . . . . . . . . . . . . . .   7
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   8
+   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .   7
+   9.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   8
+     9.1.  Normative References  . . . . . . . . . . . . . . . . . .   8
+     9.2.  URIs  . . . . . . . . . . . . . . . . . . . . . . . . . .   9
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   9
 
 1.  Introduction
 
@@ -101,18 +105,20 @@ Table of Contents
    received a legal demand to deny access to a resource or to a set of
    resources".
 
+
+
+
+
+Sahib                   Expires December 31, 2018               [Page 2]
+
+Internet-Draft          New elements for HTTP 451              June 2018
+
+
    Subsequently, an effort was made to investigate usage of HTTP 451 and
    evaluate if it fulfills its mandate of providing "transparency in
    circumstances where issues of law or public policy affect server
    operations" [IMPL_REPORT_DRAFT].  This draft attempts to explicate
    the protocol recommendations arising out of that investigation.
-
-
-
-Sahib                  Expires September 20, 2018               [Page 2]
-
-Internet-Draft          New elements for HTTP 451             March 2018
-
 
 2.  Requirements
 
@@ -156,23 +162,23 @@ Internet-Draft          New elements for HTTP 451             March 2018
       include space for both, as both provide essential information
       about the legal block.
 
+
+
+
+Sahib                   Expires December 31, 2018               [Page 3]
+
+Internet-Draft          New elements for HTTP 451              June 2018
+
+
    -  HTTP status code 451 is increasingly being used to deny access to
       resources based on geographical IP.  The response SHOULD contain a
       provisional header with geographical scope of block.  This scope
-      SHOULD correspond to alpha-2 country code defined in [ISO.3166-1].
-      The rationale for keeping the geographical scope to country-level
-      granularity is that most blocks are mandated by national
-
-
-
-Sahib                  Expires September 20, 2018               [Page 3]
-
-Internet-Draft          New elements for HTTP 451             March 2018
-
-
-      governments [IMPL_REPORT_DRAFT].  In addition, as the serving of
-      this status code is voluntary, there is value in not complicating
-      the specification.
+      SHOULD correspond to comma-separated list of alpha-2 country codes
+      defined in [ISO.3166-1].  The rationale for keeping the
+      geographical scope to country-level granularity is that most
+      blocks are mandated by national governments [IMPL_REPORT_DRAFT].
+      In addition, as the serving of this status code is voluntary,
+      there is value in not complicating the specification.
 
 5.  Security Considerations
 
@@ -211,20 +217,17 @@ Internet-Draft          New elements for HTTP 451             March 2018
 
    HTTP 451 status code response can be sent by the server hosting the
    blocked resource (end node) or an intermediary node that implements
+
+
+
+
+Sahib                   Expires December 31, 2018               [Page 4]
+
+Internet-Draft          New elements for HTTP 451              June 2018
+
+
    the block.  If a resource is "blocked-by" a particular ISP then the
    ISP will be the one serving the status code.
-
-
-
-
-
-
-
-
-Sahib                  Expires September 20, 2018               [Page 4]
-
-Internet-Draft          New elements for HTTP 451             March 2018
-
 
 7.2.  Privacy
 
@@ -269,18 +272,21 @@ Internet-Draft          New elements for HTTP 451             March 2018
 
    [RFC7725] is an open standard.
 
+
+
+
+
+
+Sahib                   Expires December 31, 2018               [Page 5]
+
+Internet-Draft          New elements for HTTP 451              June 2018
+
+
 7.8.  Heterogeneity Support
 
    An HTTP 451 status code response can be used for any web resource and
    for any software that is capable of understanding HTTP header
    responses.
-
-
-
-Sahib                  Expires September 20, 2018               [Page 5]
-
-Internet-Draft          New elements for HTTP 451             March 2018
-
 
 7.9.  Anonymity
 
@@ -322,21 +328,21 @@ Internet-Draft          New elements for HTTP 451             March 2018
    correctly used.  Objective of this draft is to increase reliability
    by making it clearer what a good HTTP 451 response looks like.
 
+
+
+
+
+
+Sahib                   Expires December 31, 2018               [Page 6]
+
+Internet-Draft          New elements for HTTP 451              June 2018
+
+
 7.15.  Confidentiality
 
    HTTP 451 status code use implies sharing of information by the
    reporter that make it easier to identify where censorship is taking
    place.  See section on Privacy and Anonymity.
-
-
-
-
-
-
-Sahib                  Expires September 20, 2018               [Page 6]
-
-Internet-Draft          New elements for HTTP 451             March 2018
-
 
 7.16.  Integrity
 
@@ -372,27 +378,36 @@ Internet-Draft          New elements for HTTP 451             March 2018
    increasing the number of false positives for any automated monitoring
    systems.
 
-8.  Normative References
+Acknowledgements
+
+   Thanks to Alp Toker, Christine Runnegar,
+
+
+
+
+
+
+
+
+Sahib                   Expires December 31, 2018               [Page 7]
+
+Internet-Draft          New elements for HTTP 451              June 2018
+
+
+9.  References
+
+9.1.  Normative References
 
    [ERRATA_ID-5181]
               Bortzmeyer, S., "[Technical Errata Reported] RFC7725
-              (5181)", 2017, <https://www.rfc-editor.org/errata/
-              eid5181>.
+              (5181)", 2017,
+              <https://www.rfc-editor.org/errata/eid5181>.
 
    [IMPL_REPORT_DRAFT]
               Abraham, S., Canales, MP., Hall, J., Khrustaleva, O., ten
               Oever, N., Runnegar, C., and S. Sahib, "Implementation
               Report for HTTP Status Code 451", 2017,
               <https://tools.ietf.org/html/draft-451-imp-report-00>.
-
-
-
-
-
-Sahib                  Expires September 20, 2018               [Page 7]
-
-Internet-Draft          New elements for HTTP 451             March 2018
-
 
    [ISO.3166-1]
               International Organization for Standardization, "Codes for
@@ -402,8 +417,8 @@ Internet-Draft          New elements for HTTP 451             March 2018
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
-              DOI 10.17487/RFC2119, March 1997, <https://www.rfc-
-              editor.org/info/rfc2119>.
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/info/rfc2119>.
 
    [RFC2277]  Alvestrand, H., "IETF Policy on Character Sets and
               Languages", BCP 18, RFC 2277, DOI 10.17487/RFC2277,
@@ -423,8 +438,23 @@ Internet-Draft          New elements for HTTP 451             March 2018
               October 2017, <https://www.rfc-editor.org/info/rfc8280>.
 
    [RFC8288]  Nottingham, M., "Web Linking", RFC 8288,
-              DOI 10.17487/RFC8288, October 2017, <https://www.rfc-
-              editor.org/info/rfc8288>.
+              DOI 10.17487/RFC8288, October 2017,
+              <https://www.rfc-editor.org/info/rfc8288>.
+
+
+
+
+
+Sahib                   Expires December 31, 2018               [Page 8]
+
+Internet-Draft          New elements for HTTP 451              June 2018
+
+
+9.2.  URIs
+
+   [1] https://www.irtf.org/mailman/listinfo/hrpc
+
+   [2] https://lists.ghserv.net/mailman/listinfo/statuscode451
 
 Author's Address
 
@@ -445,4 +475,30 @@ Author's Address
 
 
 
-Sahib                  Expires September 20, 2018               [Page 8]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Sahib                   Expires December 31, 2018               [Page 9]

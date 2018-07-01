@@ -1,8 +1,8 @@
 ---
 title: New protocol elements for HTTP Status Code 451
 abbrev: New elements for HTTP 451
-docname: draft-sahib-451-new-protocol-elements-00
-date: 2018-03-19
+docname: draft-sahib-451-new-protocol-elements-01
+date: 2018-06-29
 category: info
 
 <!-- area: IRTF -->
@@ -92,7 +92,7 @@ Discussion of this draft is at <https://www.irtf.org/mailman/listinfo/hrpc> and 
 
 {{RFC7725}} was standardized by the IETF in February 2016. It defined HTTP status code 451 - to be used when a "a server operator has received a legal demand to deny access to a resource or to a set of resources".
 
-Subsequently, an effort was made to investigate usage of HTTP 451 and evaluate if it fulfills its mandate of providing "transparency in circumstances where issues of law or public policy affect server operations" {{IMPL_REPORT_DRAFT}}. This draft attempts to explicate the protocol recommendations arising out of that investigation.
+Subsequently, an effort was made to investigate usage of HTTP 451 and evaluate if it fulfills its mandate of providing "transparency in circumstances where issues of law or public policy affect server operations" {{IMPL_REPORT_DRAFT}}. This draft attempts to explicate the protocol recommendations arising out of that investigation. In addition, specific recommendations are made in order to disambiguate cases where the status code may or may not be used.
 
 
 # Requirements
@@ -104,15 +104,17 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 The status code as standardized by the IETF specifies the following elements {{RFC7725}} -
 
-- A server can return status code 451 to indicate that it is denying access to a resource or multiple resources on account of a legal demand.
+- A server can return status code 451 to indicate that it is denying access to a resource or multiple resources on account of a legal demand. Note that while the introduction of {{RFC7725}} mentions that the legal demand for denial of access should be related to the resource being requested, the RFC's description does not make it clear that the resource being denied access to must be directly mentioned in the legal demand. 
 - Responses using the status code SHOULD include an explanation in the response body of the details of the legal demand.
 - Responses SHOULD include a "Link" HTTP header field {{RFC8288}} whose value is a URI reference {{RFC3986}} identifying itself.  The "Link" header field MUST have a "rel" parameter whose value is "blocked-by". The intent is that the header be used to identify the entity actually implementing blockage, not any other entity mandating it.
 
 
 # Recommendations
 
+- HTTP 451 SHOULD NOT be used by an operator to deny access to a resource on the basis of a legal demand that is not specific to the requested resource.
+- HTTP 451 SHOULD NOT be used by an operator to deny access to a resource on the basis of a policy specified by the operator (as opposed to a legal demand being placed on the operator).
 - In addition to the "blocked-by" header, an HTTP response with status code 451 SHOULD include another "Link" HTTP header field which has a "rel" parameter whose value is "blocking-authority". It's important to distinguish between the implementer of the block, and the authority that mandated the block in the first place. This is because these two organizations might not be the same - a government (the blocking authority) could force an Internet Service Provider (the implementer of the block) to deny access to a certain resource. {{IMPL_REPORT_DRAFT}} notes that  there is confusion amongst implementors of {{RFC7725}} about the meaning of the term "blocked-by", perhaps in part because of the example given {{ERRATA_ID-5181}} - it would be useful to explicitly include space for both, as both provide essential information about the legal block.
-- HTTP status code 451 is increasingly being used to deny access to resources based on geographical IP. The response SHOULD contain a provisional header with geographical scope of block. This scope SHOULD correspond to alpha-2 country code defined in {{ISO.3166-1}}. The rationale for keeping the geographical scope to country-level granularity is that most blocks are mandated by national governments {{IMPL_REPORT_DRAFT}}. In addition, as the serving of this status code is voluntary, there is value in not complicating the specification.
+- HTTP status code 451 is increasingly being used to deny access to resources based on geographical IP. The response SHOULD contain a provisional header with geographical scope of block. This scope SHOULD correspond to comma-separated list of alpha-2 country codes defined in {{ISO.3166-1}}. The rationale for keeping the geographical scope to country-level granularity is that most blocks are mandated by national governments {{IMPL_REPORT_DRAFT}}. In addition, as the serving of this status code is voluntary, there is value in not complicating the specification.
 
 # Security Considerations
 
@@ -167,7 +169,7 @@ Refer to section 5, Security Considerations, of {{RFC7725}}.
 
 ## Censorship Resistance
 
-While HTTP 451 status code cannot prevent censorship, it can help make censorship more transparent and make assessment of Internet censorship cases easier by providing information about the block in a parseable manner.
+While HTTP 451 status code cannot prevent censorship, it can help make some kinds of censorship (i.e. where the censorer is interested and able to provide information about the block) more transparent and make its assessment easier by providing information about the block in a parseable manner.
 
 
 ## Open Standards
@@ -232,4 +234,11 @@ HTTP 451 does not have any legal or technical limitations which prevents the dev
 
 ## Outcome Transparency
 
-The assumption behind the development of the status code 451 is that transparency has a chilling effect on censorship and that transparency will enable the process of justice by allowing acts of censorship to be challenged. In some countries, blocks orders are unevenly implemented by ISPs either because it does not serve their bottom-lines or they are resisting censorship - governments in those countries could mandate the implementation of status code 451 which will make it easier for them to monitor the implementation of their block orders. Surveillance systems in some countries could be updated to watch out for the 451 error code on unencrypted traffic making it easier to identify those trying to access prohibited content. Before the implementation of this standard there would be no uniformity in which websites would implement a block order increasing the number of false positives for any automated monitoring systems.
+The assumption behind the development of the status code 451 is that transparency has a chilling effect on censorship and that transparency will allow acts of censorship to be challenged. In some countries, blocks orders are unevenly implemented by ISPs either because it does not serve their bottom-lines or they are resisting censorship - governments in those countries could mandate the implementation of status code 451 which will make it easier for them to monitor the implementation of their block orders. Surveillance systems in some countries could be updated to watch out for the 451 error code on unencrypted traffic making it easier to identify those trying to access prohibited content. Before the implementation of this standard there would be no uniformity in which websites would implement a block order increasing the number of false positives for any automated monitoring systems.
+
+
+Acknowledgements
+================
+{: numbered="no"}
+
+Thanks to Alp Toker, Christine Runnegar, Niels ten Oever, Stephane Bortzmeyer, Corinne Cath and many others on the HRPC mailing list (linked above) for reviewing and brainstorming.
